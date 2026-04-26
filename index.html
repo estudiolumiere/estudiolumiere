@@ -460,6 +460,44 @@
   .btn-primary:active{transform:scale(.98);opacity:.88}
   .btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none}
 
+  .btn-back-login{
+    background:transparent;
+    border:none;
+    color:rgba(255,255,255,.35);
+    font-size:.78rem;
+    font-family:'DM Sans',sans-serif;
+    cursor:pointer;
+    margin-top:.75rem;
+    letter-spacing:.04em;
+    transition:.2s;
+    padding:.3rem .5rem;
+    border-radius:8px;
+    display:block;
+    width:100%;
+    text-align:center;
+  }
+  .btn-back-login:hover{color:rgba(255,255,255,.65)}
+  .admin-nav{
+    display:flex;
+    align-items:center;
+    margin-bottom:1rem;
+  }
+  .btn-back-admin{
+    display:inline-flex;
+    align-items:center;
+    gap:.4rem;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
+    color:rgba(255,255,255,.55);
+    border-radius:10px;
+    padding:.45rem .9rem;
+    font-size:.78rem;
+    cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+    letter-spacing:.04em;
+    transition:.2s;
+  }
+  .btn-back-admin:hover{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.09)}
   .btn-logout{
     background:transparent;
     border:1px solid rgba(255,255,255,.15);
@@ -569,6 +607,7 @@
     </div>
     <button class="btn-login" onclick="doLogin()">Ingresar</button>
     <div class="login-error" id="login-error"></div>
+    <button class="btn-back-login" onclick="cancelLogin()">← Volver al catálogo</button>
   </div>
 </div>
 
@@ -639,7 +678,9 @@
   <!-- ══════════ ADMINISTRACIÓN ══════════ -->
   <div id="view-admin" class="hidden">
     <div class="admin">
-      <button class="btn-logout" onclick="doLogout()">Cerrar sesión ✕</button>
+      <div class="admin-nav">
+        <button class="btn-back-admin" onclick="doLogout()">← Volver al catálogo</button>
+      </div>
       <div class="admin-header">
         <div class="admin-title">Panel de productos</div>
         <span class="badge" id="count-badge">0 productos</span>
@@ -710,6 +751,13 @@
       document.getElementById('login-pass').value = '';
       document.getElementById('login-pass').focus();
     }
+  }
+
+  function cancelLogin() {
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-error').textContent = '';
+    showTab('catalog');
   }
 
   function doLogout() {
