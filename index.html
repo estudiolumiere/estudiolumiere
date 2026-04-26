@@ -390,10 +390,52 @@ footer {
 
 footer strong { color: var(--soft); }
 
+/* ── LOGO ── */
+.logo-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(192,132,252,0.45);
+  box-shadow: 0 0 0 4px rgba(139,92,246,0.12);
+  margin-bottom: 18px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── PRODUCT SHOWCASE IMAGE ── */
+.showcase {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.showcase img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  max-height: 340px;
+}
+
+.showcase-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(13,11,20,0.88) 0%, transparent 100%);
+  padding: 28px 16px 14px;
+  font-size: 12px;
+  color: var(--soft);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
 /* ── DESKTOP ── */
 @media (min-width: 700px) {
   header { padding: 72px 0 56px; }
   .brand-name { font-size: 3.2rem; }
+  .logo-circle { width: 82px; height: 82px; }
 }
 </style>
 </head>
@@ -405,6 +447,7 @@ footer strong { color: var(--soft); }
 
   <!-- HEADER -->
   <header>
+    <img src="Logo.png" alt="Lumière Logo" class="logo-circle">
     <div class="brand-tag">Córdoba Capital · Argentina</div>
     <h1 class="brand-name">Estudio Gráfico <em>Lumière</em></h1>
     <p class="brand-sub">Diseño Gráfico</p>
@@ -442,6 +485,12 @@ footer strong { color: var(--soft); }
 
   <!-- INFO -->
   <div id="info" class="tab-section active">
+
+    <div class="showcase">
+      <img src="publicacion_1.png" alt="Marcos selfie y carteles personalizados — Estudio Gráfico Lumière">
+      <div class="showcase-caption">Marcos selfie, carteles y props personalizados para tu momento especial</div>
+    </div>
+
     <div class="info-block">
       <h3>📦 Catálogo completo por WhatsApp</h3>
       <p>Los productos mostrados son los más pedidos. Para ver todo el catálogo escribinos directamente por WhatsApp.</p>
