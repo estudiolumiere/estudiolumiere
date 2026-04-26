@@ -770,7 +770,6 @@
       <div class="footer-channels">
         Canales de venta: <span>WhatsApp</span> · <span>Instagram</span> · <span>Facebook Marketplace</span>
       </div>
-      <button class="btn-owner" onclick="requireAdmin()">⚙ Propietario</button>
     </div>
   </div>
 
@@ -819,6 +818,11 @@
       <div class="list-label">Productos en el catálogo</div>
       <div id="admin-list"></div>
     </div>
+  </div>
+
+  <!-- Botón flotante Propietario -->
+  <div id="btn-propietario-wrap" style="text-align:center;padding:.75rem 1rem 1.5rem;background:#0F0618;">
+    <button class="btn-owner" onclick="requireAdmin()">⚙ Propietario</button>
   </div>
 
 </div><!-- fin app-main -->
@@ -1134,6 +1138,7 @@
     document.getElementById('view-catalog').classList.toggle('hidden', tab !== 'catalog');
     document.getElementById('view-admin').classList.toggle('hidden', tab !== 'admin');
     document.getElementById('tab-btn-catalog').classList.toggle('active', tab === 'catalog');
+    document.getElementById('btn-propietario-wrap').classList.toggle('hidden', tab !== 'catalog');
   }
 
   /* ── Toast ── */
