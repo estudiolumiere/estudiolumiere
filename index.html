@@ -461,43 +461,49 @@
   .btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none}
 
   .btn-back-login{
-    background:transparent;
-    border:none;
-    color:rgba(255,255,255,.35);
-    font-size:.78rem;
+    background:rgba(255,255,255,.12);
+    border:1.5px solid rgba(255,255,255,.3);
+    color:white;
+    font-size:.92rem;
     font-family:'DM Sans',sans-serif;
+    font-weight:600;
     cursor:pointer;
-    margin-top:.75rem;
-    letter-spacing:.04em;
+    margin-top:1rem;
+    letter-spacing:.06em;
     transition:.2s;
-    padding:.3rem .5rem;
-    border-radius:8px;
+    padding:.75rem 1rem;
+    border-radius:12px;
     display:block;
     width:100%;
     text-align:center;
   }
-  .btn-back-login:hover{color:rgba(255,255,255,.65)}
+  .btn-back-login:hover{background:rgba(255,255,255,.22);color:white}
   .admin-nav{
     display:flex;
     align-items:center;
     margin-bottom:1rem;
   }
   .btn-back-admin{
-    display:inline-flex;
+    display:flex;
     align-items:center;
-    gap:.4rem;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.12);
-    color:rgba(255,255,255,.55);
-    border-radius:10px;
-    padding:.45rem .9rem;
-    font-size:.78rem;
+    justify-content:center;
+    gap:.5rem;
+    background:linear-gradient(135deg,var(--fuchsia),var(--violet));
+    border:none;
+    color:white;
+    border-radius:13px;
+    padding:.8rem 1.25rem;
+    font-size:.92rem;
+    font-weight:600;
     cursor:pointer;
     font-family:'DM Sans',sans-serif;
-    letter-spacing:.04em;
+    letter-spacing:.05em;
     transition:.2s;
+    width:100%;
+    box-shadow:0 4px 18px rgba(212,0,110,.25);
   }
-  .btn-back-admin:hover{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.09)}
+  .btn-back-admin:hover{opacity:.88;transform:scale(.99)}
+  .btn-back-admin:active{transform:scale(.96)}
   .btn-logout{
     background:transparent;
     border:1px solid rgba(255,255,255,.15);
@@ -591,6 +597,96 @@
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+  .btn-owner{
+    margin-top:1rem;
+    background:transparent;
+    border:1px solid rgba(255,255,255,.1);
+    color:rgba(255,255,255,.2);
+    border-radius:8px;
+    padding:.4rem 1rem;
+    font-size:.65rem;
+    font-family:'DM Sans',sans-serif;
+    letter-spacing:.1em;
+    cursor:pointer;
+    transition:.2s;
+    text-transform:uppercase;
+  }
+  .btn-owner:hover{color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.25)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .btn-edit{
+    background:rgba(107,33,168,.15);
+    border:1px solid rgba(168,85,247,.3);
+    color:var(--violet-light);
+    width:32px;height:32px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:.85rem;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    transition:.2s;
+    margin-right:.3rem;
+  }
+  .btn-edit:active{transform:scale(.88);background:rgba(107,33,168,.3)}
+
+  /* Modal de edición */
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:rgba(10,4,24,.82);
+    z-index:500;
+    display:flex;align-items:center;justify-content:center;
+    padding:1.25rem;
+    backdrop-filter:blur(4px);
+  }
+  .modal-box{
+    background:#1e0d3a;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:22px;
+    padding:1.5rem 1.25rem;
+    width:100%;
+    max-width:420px;
+    max-height:90vh;
+    overflow-y:auto;
+  }
+  .modal-title{
+    font-family:'Playfair Display',serif;
+    color:rgba(255,255,255,.75);
+    font-style:italic;
+    font-size:1.1rem;
+    margin-bottom:1.25rem;
+  }
+  .modal-btns{
+    display:flex;gap:.65rem;margin-top:.5rem;
+  }
+  .btn-cancel{
+    flex:1;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    color:rgba(255,255,255,.5);
+    border-radius:12px;
+    padding:.75rem;
+    font-size:.88rem;
+    font-weight:500;
+    cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+    transition:.2s;
+  }
+  .btn-cancel:active{opacity:.7}
+  .btn-save-edit{
+    flex:2;
+    background:linear-gradient(135deg,var(--fuchsia),var(--violet));
+    color:white;
+    border:none;
+    border-radius:12px;
+    padding:.75rem;
+    font-size:.88rem;
+    font-weight:600;
+    cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+    letter-spacing:.05em;
+    transition:.2s;
+  }
+  .btn-save-edit:active{transform:scale(.98);opacity:.88}
+  .btn-save-edit:disabled{opacity:.45;cursor:not-allowed}
   .hidden{display:none!important}
 </style>
 </head>
@@ -624,8 +720,7 @@
 
   <!-- TABS -->
   <div class="tabs">
-    <div class="tab active" onclick="showTab('catalog')" id="tab-btn-catalog">Catálogo</div>
-    <div class="tab" onclick="requireAdmin()" id="tab-btn-admin">⚙ Administrar</div>
+    <div class="tab active" id="tab-btn-catalog">Catálogo</div>
   </div>
 
   <!-- ══════════ CATÁLOGO ══════════ -->
@@ -672,6 +767,7 @@
       <div class="footer-channels">
         Canales de venta: <span>WhatsApp</span> · <span>Instagram</span> · <span>Facebook Marketplace</span>
       </div>
+      <button class="btn-owner" onclick="requireAdmin()">⚙ Propietario</button>
     </div>
   </div>
 
@@ -724,15 +820,52 @@
 
 </div><!-- fin app-main -->
 
+<!-- Modal edición -->
+<div class="modal-overlay hidden" id="edit-modal">
+  <div class="modal-box">
+    <div class="modal-title">Editar producto</div>
+
+    <div class="field">
+      <label>Imagen del producto</label>
+      <div class="img-upload-area" style="position:relative">
+        <input type="file" id="edit-img-input" accept="image/*" onchange="previewEditImage(event)" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+        <img id="edit-img-preview" style="width:100%;max-height:140px;object-fit:cover;border-radius:10px;display:block" alt="Vista previa">
+        <p style="font-size:.73rem;color:rgba(255,255,255,.3);margin-top:.6rem;text-align:center">Tocá para cambiar imagen</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Nombre del producto / servicio</label>
+      <input type="text" id="edit-name" placeholder="Nombre" autocomplete="off">
+    </div>
+    <div class="field">
+      <label>Descripción / detalle</label>
+      <textarea id="edit-detail" placeholder="Descripción…"></textarea>
+    </div>
+    <div class="field">
+      <label>Precio</label>
+      <input type="text" id="edit-price" placeholder="Precio" autocomplete="off">
+    </div>
+
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeEditModal()">Cancelar</button>
+      <button class="btn-save-edit" id="edit-save-btn" onclick="saveEdit()">Guardar cambios ✦</button>
+    </div>
+  </div>
+</div>
+
 <!-- Toast notification -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
   /* ══════════════════════════════════════
-     CONTRASEÑA DE ADMINISTRADOR
-     Cambiá este valor por tu contraseña real
+     CONFIGURACIÓN — EDITÁ ESTOS VALORES
   ══════════════════════════════════════ */
-  var ADMIN_PASSWORD = 'lumiere2025';
+  var ADMIN_PASSWORD = 'lumiere2025';   // Tu contraseña
+  var GITHUB_USER    = 'TU_USUARIO';    // Tu usuario de GitHub
+  var GITHUB_REPO    = 'TU_REPO';       // Nombre del repositorio
+  var GITHUB_TOKEN   = 'TU_TOKEN';      // Token de GitHub (ver instrucciones)
+  var DATA_FILE      = 'productos.json';// Archivo donde se guardan los productos
 
   /* ── Estado sesión ── */
   var adminLoggedIn = false;
@@ -779,18 +912,102 @@
   /* ── Estado productos ── */
   var products = [];
   var imgBase64 = null;
+  var githubFileSha = null; // SHA del archivo en GitHub (necesario para actualizar)
 
-  /* ── Persistencia: localStorage ── */
-  function saveProducts() {
-    try { localStorage.setItem('lumiere_products', JSON.stringify(products)); } catch(e){}
+  /* ══════════════════════════════════════
+     PERSISTENCIA — GITHUB API
+  ══════════════════════════════════════ */
+
+  function githubApiUrl() {
+    return 'https://api.github.com/repos/' + GITHUB_USER + '/' + GITHUB_REPO + '/contents/' + DATA_FILE;
   }
 
+  function githubHeaders() {
+    return {
+      'Authorization': 'token ' + GITHUB_TOKEN,
+      'Content-Type': 'application/json',
+      'Accept': 'application/vnd.github.v3+json'
+    };
+  }
+
+  /* Cargar productos desde GitHub */
   function loadProducts() {
-    try {
-      var raw = localStorage.getItem('lumiere_products');
-      if (raw) products = JSON.parse(raw);
-    } catch(e) { products = []; }
-    renderAll();
+    showLoading(true);
+    fetch(githubApiUrl() + '?t=' + Date.now(), { headers: githubHeaders() })
+      .then(function(r) {
+        if (r.status === 404) {
+          // Archivo no existe aún, empezar vacío
+          products = [];
+          githubFileSha = null;
+          renderAll();
+          showLoading(false);
+          return null;
+        }
+        return r.json();
+      })
+      .then(function(data) {
+        if (!data) return;
+        githubFileSha = data.sha;
+        var decoded = atob(data.content.replace(/\n/g, ''));
+        try { products = JSON.parse(decoded); } catch(e) { products = []; }
+        renderAll();
+        showLoading(false);
+      })
+      .catch(function(err) {
+        console.error('Error cargando productos:', err);
+        // Fallback a localStorage si GitHub no está configurado
+        try {
+          var raw = localStorage.getItem('lumiere_products');
+          if (raw) products = JSON.parse(raw);
+        } catch(e) { products = []; }
+        renderAll();
+        showLoading(false);
+      });
+  }
+
+  /* Guardar productos en GitHub */
+  function saveProducts(callback) {
+    if (GITHUB_TOKEN === 'TU_TOKEN') {
+      // Sin token configurado: usar localStorage como fallback
+      try { localStorage.setItem('lumiere_products', JSON.stringify(products)); } catch(e){}
+      if (callback) callback(false);
+      return;
+    }
+
+    var jsonStr = JSON.stringify(products, null, 2);
+    var encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+
+    var body = {
+      message: 'Actualizar catálogo de productos',
+      content: encoded,
+      branch: 'main'
+    };
+    if (githubFileSha) body.sha = githubFileSha;
+
+    fetch(githubApiUrl(), {
+      method: 'PUT',
+      headers: githubHeaders(),
+      body: JSON.stringify(body)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.content) githubFileSha = data.content.sha;
+      if (callback) callback(true);
+    })
+    .catch(function(err) {
+      console.error('Error guardando:', err);
+      // Fallback localStorage
+      try { localStorage.setItem('lumiere_products', JSON.stringify(products)); } catch(e){}
+      if (callback) callback(false);
+    });
+  }
+
+  /* ── Loading state ── */
+  function showLoading(on) {
+    var grid = document.getElementById('product-grid');
+    if (on) {
+      grid.innerHTML = '<div class="empty-state"><div class="icon" style="animation:spin 1s linear infinite;display:inline-block">✦</div><p style="margin-top:.5rem">Cargando catálogo…</p></div>';
+    }
   }
 
   /* ── Render catálogo ── */
@@ -827,6 +1044,7 @@
           '<strong>' + escapeHtml(p.name) + '</strong>' +
           '<span>' + escapeHtml(p.price) + '</span>' +
         '</div>' +
+        '<button class="btn-edit" onclick="openEditModal(' + i + ')" aria-label="Editar">✎</button>' +
         '<button class="btn-del" onclick="deleteProduct(' + i + ')" aria-label="Eliminar">✕</button>' +
         '</div>';
     }).join('');
@@ -867,12 +1085,13 @@
     btn.disabled = true;
     btn.textContent = 'Guardando…';
     products.push({ id: Date.now(), name: name, detail: detail, price: price, img: imgBase64 });
-    saveProducts();
-    renderAll();
-    resetForm();
-    btn.disabled = false;
-    btn.textContent = 'Agregar al catálogo ✦';
-    showToast('¡Producto agregado! ✦');
+    saveProducts(function(ok) {
+      renderAll();
+      resetForm();
+      btn.disabled = false;
+      btn.textContent = 'Agregar al catálogo ✦';
+      showToast(ok ? '¡Producto guardado en la web! ✦' : '¡Producto agregado! (configurá GitHub para persistencia)');
+    });
   }
 
   function resetForm() {
@@ -892,9 +1111,10 @@
   function deleteProduct(i) {
     if (!confirm('¿Eliminar "' + products[i].name + '"?')) return;
     products.splice(i, 1);
-    saveProducts();
-    renderAll();
-    showToast('Producto eliminado');
+    saveProducts(function(ok) {
+      renderAll();
+      showToast(ok ? 'Producto eliminado de la web' : 'Producto eliminado');
+    });
   }
 
   /* ── Tabs ── */
@@ -902,7 +1122,6 @@
     document.getElementById('view-catalog').classList.toggle('hidden', tab !== 'catalog');
     document.getElementById('view-admin').classList.toggle('hidden', tab !== 'admin');
     document.getElementById('tab-btn-catalog').classList.toggle('active', tab === 'catalog');
-    document.getElementById('tab-btn-admin').classList.toggle('active', tab === 'admin');
   }
 
   /* ── Toast ── */
@@ -919,8 +1138,77 @@
     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  /* ── Edit Modal ── */
+  var editIndex = -1;
+  var editImgBase64 = undefined; // undefined = no cambió, null = sin imagen, string = nueva imagen
+
+  function openEditModal(i) {
+    editIndex = i;
+    editImgBase64 = undefined;
+    var p = products[i];
+    document.getElementById('edit-name').value = p.name || '';
+    document.getElementById('edit-detail').value = p.detail || '';
+    document.getElementById('edit-price').value = p.price || '';
+    var prev = document.getElementById('edit-img-preview');
+    if (p.img) {
+      prev.src = p.img;
+      prev.style.display = 'block';
+    } else {
+      prev.src = '';
+      prev.style.display = 'none';
+    }
+    document.getElementById('edit-img-input').value = '';
+    document.getElementById('edit-modal').classList.remove('hidden');
+  }
+
+  function closeEditModal() {
+    document.getElementById('edit-modal').classList.add('hidden');
+    editIndex = -1;
+    editImgBase64 = undefined;
+  }
+
+  function previewEditImage(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      editImgBase64 = ev.target.result;
+      var prev = document.getElementById('edit-img-preview');
+      prev.src = editImgBase64;
+      prev.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function saveEdit() {
+    if (editIndex < 0) return;
+    var name  = document.getElementById('edit-name').value.trim();
+    var detail= document.getElementById('edit-detail').value.trim();
+    var price = document.getElementById('edit-price').value.trim();
+    if (!name || !price) { showToast('Completá nombre y precio ✦'); return; }
+    var btn = document.getElementById('edit-save-btn');
+    btn.disabled = true;
+    btn.textContent = 'Guardando…';
+    products[editIndex].name   = name;
+    products[editIndex].detail = detail;
+    products[editIndex].price  = price;
+    if (editImgBase64 !== undefined) products[editIndex].img = editImgBase64;
+    saveProducts(function(ok) {
+      renderAll();
+      closeEditModal();
+      btn.disabled = false;
+      btn.textContent = 'Guardar cambios ✦';
+      showToast(ok ? '¡Producto actualizado en la web! ✦' : '¡Producto actualizado!');
+    });
+  }
+
+  // Cerrar modal tocando afuera
+  document.getElementById('edit-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeEditModal();
+  });
+
   /* ── Init ── */
   loadProducts();
-</script>
+
 </body>
 </html>
