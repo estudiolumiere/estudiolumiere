@@ -158,6 +158,40 @@ header {
 .soc-fb  { background: rgba(99,130,246,0.09); border-color: rgba(99,130,246,0.22); }
 .soc-fb .ico { background: rgba(99,130,246,0.16); }
 
+/* ── CATÁLOGO DRIVE BUTTON ── */
+.soc-drive {
+  background: linear-gradient(135deg, rgba(139,92,246,0.18), rgba(217,70,239,0.14));
+  border-color: rgba(192,132,252,0.38);
+  position: relative;
+  overflow: hidden;
+}
+.soc-drive::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(192,132,252,0.08), transparent);
+  pointer-events: none;
+}
+.soc-drive .ico {
+  background: linear-gradient(135deg, rgba(139,92,246,0.35), rgba(217,70,239,0.25));
+}
+.soc-drive .lbl { color: #e9d5ff; }
+.soc-drive .arrow { opacity: 0.55; color: var(--accent); }
+
+.drive-badge {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(192,132,252,0.15);
+  border: 1px solid rgba(192,132,252,0.28);
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-weight: 600;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
 /* ── TABS ── */
 .tabs {
   display: flex;
@@ -459,6 +493,14 @@ footer strong { color: var(--soft); }
 
   <!-- SOCIAL -->
   <div class="socials">
+    <a href="https://drive.google.com/drive/folders/1SQT88CyLCZV2rZaWmXsaj1LXOB7JN-cN?usp=drive_link" target="_blank" class="soc-btn soc-drive">
+      <div class="ico">📂</div>
+      <div class="lbl">
+        Catálogo <span class="drive-badge">Nuevo</span>
+        <small>Ver catálogo completo con fotos</small>
+      </div>
+      <span class="arrow">›</span>
+    </a>
     <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" class="soc-btn soc-wa">
       <div class="ico">💬</div>
       <div class="lbl">WhatsApp <small>Catálogo completo y pedidos</small></div>
@@ -751,6 +793,14 @@ footer strong { color: var(--soft); }
       </div>
     </div>
     <div class="socials" style="margin-top:18px;margin-bottom:0">
+      <a href="https://drive.google.com/drive/folders/1SQT88CyLCZV2rZaWmXsaj1LXOB7JN-cN?usp=drive_link" target="_blank" class="soc-btn soc-drive">
+        <div class="ico">📂</div>
+        <div class="lbl">
+          Catálogo <span class="drive-badge">Nuevo</span>
+          <small>Ver catálogo completo con fotos</small>
+        </div>
+        <span class="arrow">›</span>
+      </a>
       <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" class="soc-btn soc-wa">
         <div class="ico">💬</div>
         <div class="lbl">WhatsApp <small>Consultas y pedidos</small></div>
