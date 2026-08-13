@@ -466,6 +466,87 @@ footer strong { color: var(--soft); }
   letter-spacing: 0.04em;
 }
 
+/* ── CLIENTS CAROUSEL ── */
+.clients-wrap { margin-bottom: 12px; }
+
+.carousel {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.carousel-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  aspect-ratio: 4 / 5;
+  background: var(--card);
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(13,11,20,0.55);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.carousel-arrow.left { left: 10px; }
+.carousel-arrow.right { right: 10px; }
+.carousel-arrow:active { transform: translateY(-50%) scale(0.92); }
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.carousel-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s, width 0.2s;
+}
+
+.carousel-dot.active {
+  background: linear-gradient(135deg, var(--violet), var(--fuchsia));
+  width: 16px;
+  border-radius: 4px;
+}
+
 /* ── DESKTOP ── */
 @media (min-width: 700px) {
   header { padding: 72px 0 56px; }
@@ -532,6 +613,32 @@ footer strong { color: var(--soft); }
     <div class="showcase">
       <img src="publicacion_1.png" alt="Marcos selfie y carteles personalizados — Estudio Gráfico Lumière">
       <div class="showcase-caption">Marcos selfie, carteles y props personalizados para tu momento especial</div>
+    </div>
+
+    <p class="cat-label">Nuestros Clientes</p>
+    <div class="clients-wrap">
+      <div class="carousel" id="clientsCarousel">
+        <div class="carousel-track" id="clientsTrack">
+          <div class="carousel-slide"><img src="1.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="2.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="3.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="4.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="5.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="6.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="7.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="8.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="9.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="10.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="11.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="12.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="13.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="14.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+          <div class="carousel-slide"><img src="15.jpg" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+        </div>
+        <button class="carousel-arrow left" onclick="carouselMove(-1)" aria-label="Foto anterior">‹</button>
+        <button class="carousel-arrow right" onclick="carouselMove(1)" aria-label="Foto siguiente">›</button>
+      </div>
+      <div class="carousel-dots" id="clientsDots"></div>
     </div>
 
     <div class="info-block">
@@ -834,6 +941,60 @@ function showTab(id, btn) {
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
 }
+
+/* ── CLIENTS CAROUSEL ── */
+(function () {
+  const track = document.getElementById('clientsTrack');
+  const dotsWrap = document.getElementById('clientsDots');
+  if (!track || !dotsWrap) return;
+
+  const slides = track.querySelectorAll('.carousel-slide');
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Ir a la foto ' + (i + 1));
+    dot.addEventListener('click', () => {
+      slides[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    });
+    dotsWrap.appendChild(dot);
+  });
+
+  const dots = dotsWrap.querySelectorAll('.carousel-dot');
+
+  function updateActiveDot() {
+    const trackRect = track.getBoundingClientRect();
+    const center = trackRect.left + trackRect.width / 2;
+    let closest = 0;
+    let minDist = Infinity;
+    slides.forEach((slide, i) => {
+      const r = slide.getBoundingClientRect();
+      const dist = Math.abs((r.left + r.width / 2) - center);
+      if (dist < minDist) { minDist = dist; closest = i; }
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+  }
+
+  let scrollTimeout;
+  track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(updateActiveDot, 80);
+  });
+
+  window.carouselMove = function (dir) {
+    const trackRect = track.getBoundingClientRect();
+    const center = trackRect.left + trackRect.width / 2;
+    let current = 0;
+    let minDist = Infinity;
+    slides.forEach((slide, i) => {
+      const r = slide.getBoundingClientRect();
+      const dist = Math.abs((r.left + r.width / 2) - center);
+      if (dist < minDist) { minDist = dist; current = i; }
+    });
+    const next = Math.min(Math.max(current + dir, 0), slides.length - 1);
+    slides[next].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  };
+})();
 </script>
 </body>
 </html>
