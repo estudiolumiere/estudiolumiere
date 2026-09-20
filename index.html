@@ -547,6 +547,85 @@ footer strong { color: var(--soft); }
   border-radius: 4px;
 }
 
+/* ── GALERÍA CATÁLOGO ── */
+.catalog-header {
+  text-align: center;
+  padding: 40px 0 8px;
+}
+
+.catalog-header .logo-circle { width: 60px; height: 60px; margin-bottom: 14px; }
+
+.catalog-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.catalog-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 28px;
+}
+
+.catalog-photo {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.catalog-photo img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.catalog-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin: 26px 0 40px;
+}
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--soft);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-back:active { opacity: 0.8; }
+
+.btn-wa-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(37,211,102,0.35);
+  background: linear-gradient(135deg, rgba(37,211,102,0.22), rgba(37,211,102,0.12));
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.btn-wa-cta:active { transform: scale(0.98); opacity: 0.9; }
+
 /* ── DESKTOP ── */
 @media (min-width: 700px) {
   header { padding: 72px 0 56px; }
@@ -559,11 +638,11 @@ footer strong { color: var(--soft); }
 
 <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" class="float-wa" aria-label="WhatsApp">💬</a>
 
-<div class="container">
+<div class="container" id="mainView">
 
   <!-- HEADER -->
   <header>
-    <img src="Logo.png" alt="Lumière Logo" class="logo-circle">
+    <img src="LOGO2.png" alt="Lumière Logo" class="logo-circle">
     <div class="brand-tag">Córdoba Capital (Bº San Martín) · Argentina</div>
     <h1 class="brand-name">Estudio Gráfico <em>Lumière</em></h1>
     <p class="brand-sub">Diseño Gráfico - Cartelería - Remeras - Productos personalizados para eventos</p>
@@ -575,7 +654,7 @@ footer strong { color: var(--soft); }
 
   <!-- SOCIAL -->
   <div class="socials">
-    <a href="https://drive.google.com/drive/folders/1SQT88CyLCZV2rZaWmXsaj1LXOB7JN-cN?usp=drive_link" target="_blank" class="soc-btn soc-drive">
+    <a href="#" onclick="showCatalogGallery(); return false;" class="soc-btn soc-drive">
       <div class="ico">📂</div>
       <div class="lbl">
         Catálogo <span class="drive-badge">Nuevo</span>
@@ -896,7 +975,7 @@ footer strong { color: var(--soft); }
       </div>
     </div>
     <div class="socials" style="margin-top:18px;margin-bottom:0">
-      <a href="https://drive.google.com/drive/folders/1SQT88CyLCZV2rZaWmXsaj1LXOB7JN-cN?usp=drive_link" target="_blank" class="soc-btn soc-drive">
+      <a href="#" onclick="showCatalogGallery(); return false;" class="soc-btn soc-drive">
         <div class="ico">📂</div>
         <div class="lbl">
           Catálogo <span class="drive-badge">Nuevo</span>
@@ -924,10 +1003,32 @@ footer strong { color: var(--soft); }
 
 </div>
 
-<footer>
+<footer id="mainFooter">
   <strong>Estudio Gráfico Lumière</strong> · Córdoba Capital, Argentina<br>
   <span style="margin-top:5px;display:block">Diseño Gráfico · Gabriela Farfan y Rodrigo Ortuño</span>
 </footer>
+
+<!-- GALERÍA DE CATÁLOGO -->
+<div class="container" id="catalogGalleryView" style="display:none">
+
+  <div class="catalog-header">
+    <img src="LOGO2.png" alt="Lumière Logo" class="logo-circle">
+    <h2 class="catalog-title">Catálogo</h2>
+    <p class="catalog-subtitle">Estudio Gráfico Lumière</p>
+  </div>
+
+  <div class="catalog-photo"><img src="CATALOGO1.png" alt="Catálogo Estudio Gráfico Lumière 1" loading="lazy"></div>
+  <div class="catalog-photo"><img src="CATALOGO2.png" alt="Catálogo Estudio Gráfico Lumière 2" loading="lazy"></div>
+  <div class="catalog-photo"><img src="CATALOGO3.png" alt="Catálogo Estudio Gráfico Lumière 3" loading="lazy"></div>
+  <div class="catalog-photo"><img src="CATALOGO4.png" alt="Catálogo Estudio Gráfico Lumière 4" loading="lazy"></div>
+  <div class="catalog-photo"><img src="CATALOGO5.png" alt="Catálogo Estudio Gráfico Lumière 5" loading="lazy"></div>
+
+  <div class="catalog-actions">
+    <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" class="btn-wa-cta">💬 Hacé tu consulta a través de WhatsApp</a>
+    <button class="btn-back" onclick="volverInicio()">‹ Volver a la página principal</button>
+  </div>
+
+</div>
 
 <script>
 function showTab(id, btn) {
@@ -935,6 +1036,21 @@ function showTab(id, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
+}
+
+/* ── GALERÍA DE CATÁLOGO ── */
+function showCatalogGallery() {
+  document.getElementById('mainView').style.display = 'none';
+  document.getElementById('mainFooter').style.display = 'none';
+  document.getElementById('catalogGalleryView').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function volverInicio() {
+  document.getElementById('catalogGalleryView').style.display = 'none';
+  document.getElementById('mainView').style.display = 'block';
+  document.getElementById('mainFooter').style.display = 'block';
+  window.scrollTo(0, 0);
 }
 
 /* ── CLIENTS CAROUSEL ── */
