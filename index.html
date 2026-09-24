@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="p:domain_verify" content="a5b4509080052b2669ab2cfc33ff02cd"/>
 <title>Estudio Gráfico Lumière · Córdoba, Argentina</title>
+<meta name="description" content="Diseño gráfico, cartelería, remeras y productos personalizados para eventos. Córdoba Capital, envíos a todo el país.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
@@ -14,14 +15,18 @@ html { scroll-behavior: smooth; }
 
 :root {
   --bg: #0d0b14;
+  --panel: #161222;
   --card: rgba(255,255,255,0.04);
   --border: rgba(255,255,255,0.09);
   --violet: #8b5cf6;
   --fuchsia: #d946ef;
   --accent: #c084fc;
   --white: #ffffff;
-  --muted: rgba(255,255,255,0.5);
-  --soft: rgba(255,255,255,0.75);
+  --muted: rgba(255,255,255,0.55);
+  --soft: rgba(255,255,255,0.78);
+  --top: 56px;
+  --nav: 64px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
 }
 
 body {
@@ -31,6 +36,7 @@ body {
   min-height: 100vh;
   font-size: 15px;
   line-height: 1.6;
+  padding-bottom: calc(var(--nav) + var(--safe-b));
 }
 
 body::before {
@@ -44,86 +50,107 @@ body::before {
   z-index: 0;
 }
 
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .container {
   max-width: 680px;
   margin: 0 auto;
-  padding: 0 18px;
+  padding: 0 16px;
   position: relative;
   z-index: 1;
 }
 
-/* ── HEADER ── */
-header {
-  padding: 52px 0 40px;
-  text-align: center;
+/* ── BARRA SUPERIOR + NAVEGACIÓN ── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  height: var(--top);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
-  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
 }
 
-.brand-tag {
-  display: inline-block;
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(192,132,252,0.10);
-  border: 1px solid rgba(192,132,252,0.25);
-  border-radius: 100px;
-  padding: 5px 14px;
-  margin-bottom: 18px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--white);
 }
 
-.brand-name {
+.brand img {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(192,132,252,0.5);
+}
+
+.brand span {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 9vw, 2.9rem);
   font-weight: 700;
-  color: var(--white);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  margin-bottom: 6px;
+  font-size: 1.05rem;
+  line-height: 1.1;
 }
 
-.brand-name em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--white);
+.brand span em { font-style: italic; font-weight: 400; }
+
+.nav {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: calc(var(--nav) + var(--safe-b));
+  padding-bottom: var(--safe-b);
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  z-index: 60;
 }
 
-.brand-sub {
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 300;
-  margin-bottom: 26px;
-}
-
-.promo {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 9px;
-  background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(217,70,239,0.15));
-  border: 1px solid rgba(217,70,239,0.28);
-  border-radius: 14px;
-  padding: 13px 16px;
-  font-size: 13px;
-  color: #e9d5ff;
-  line-height: 1.5;
-  text-align: left;
-  max-width: 360px;
-  margin: 0 auto;
-}
-
-.promo-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
-
-/* ── SOCIAL BUTTONS ── */
-.socials {
+.nav a {
   display: flex;
   flex-direction: column;
-  gap: 11px;
-  margin: 36px 0;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 500;
 }
 
+.nav svg {
+  width: 22px; height: 22px;
+  fill: none; stroke: currentColor;
+  stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+}
+
+.nav a[aria-current="page"] { color: var(--accent); }
+
+/* ── VISTAS ── */
+.view { display: none; padding-top: 22px; }
+.view.active { display: block; }
+
+.view-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--soft);
+  margin: 26px 0 10px;
+}
+
+/* ── BOTONES ── */
 .soc-btn {
   display: flex;
   align-items: center;
@@ -134,340 +161,46 @@ header {
   font-size: 14px;
   font-weight: 500;
   border: 1px solid transparent;
-  transition: transform 0.18s, opacity 0.18s;
   color: var(--white);
+  transition: transform 0.18s, opacity 0.18s;
 }
 
-.soc-btn:active { transform: scale(0.98); opacity: 0.82; }
+.soc-btn:active { transform: scale(0.98); opacity: 0.85; }
 
 .soc-btn .ico {
-  width: 36px; height: 36px;
+  width: 38px; height: 38px;
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.15rem;
   flex-shrink: 0;
 }
 
-.soc-btn .lbl { flex: 1; }
-.soc-btn .lbl small { display: block; font-size: 11px; font-weight: 300; opacity: 0.6; margin-top: 1px; }
-.soc-btn .arrow { opacity: 0.35; font-size: 16px; }
+.soc-btn .lbl { flex: 1; line-height: 1.35; }
+.soc-btn .lbl small { display: block; font-size: 12px; font-weight: 300; opacity: 0.65; }
+.soc-btn .arrow { opacity: 0.4; font-size: 18px; }
 
-.soc-wa  { background: rgba(37,211,102,0.09); border-color: rgba(37,211,102,0.22); }
+.soc-wa  { background: rgba(37,211,102,0.09); border-color: rgba(37,211,102,0.24); }
 .soc-wa .ico { background: rgba(37,211,102,0.16); }
-.soc-ig  { background: rgba(217,70,239,0.09); border-color: rgba(217,70,239,0.22); }
+.soc-ig  { background: rgba(217,70,239,0.09); border-color: rgba(217,70,239,0.24); }
 .soc-ig .ico { background: rgba(217,70,239,0.16); }
-.soc-fb  { background: rgba(99,130,246,0.09); border-color: rgba(99,130,246,0.22); }
+.soc-fb  { background: rgba(99,130,246,0.09); border-color: rgba(99,130,246,0.24); }
 .soc-fb .ico { background: rgba(99,130,246,0.16); }
-
-/* ── CATÁLOGO DRIVE BUTTON ── */
 .soc-drive {
-  background: linear-gradient(135deg, rgba(139,92,246,0.18), rgba(217,70,239,0.14));
-  border-color: rgba(192,132,252,0.38);
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(135deg, rgba(139,92,246,0.22), rgba(217,70,239,0.16));
+  border-color: rgba(192,132,252,0.4);
 }
-.soc-drive::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(192,132,252,0.08), transparent);
-  pointer-events: none;
-}
-.soc-drive .ico {
-  background: linear-gradient(135deg, rgba(139,92,246,0.35), rgba(217,70,239,0.25));
-}
-.soc-drive .lbl { color: #e9d5ff; }
-.soc-drive .arrow { opacity: 0.55; color: var(--accent); }
+.soc-drive .ico { background: linear-gradient(135deg, rgba(139,92,246,0.35), rgba(217,70,239,0.25)); }
 
-.drive-badge {
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(192,132,252,0.15);
-  border: 1px solid rgba(192,132,252,0.28);
-  border-radius: 6px;
-  padding: 2px 7px;
-  font-weight: 600;
-  margin-left: 4px;
-  vertical-align: middle;
-}
+.stack { display: flex; flex-direction: column; gap: 11px; }
 
-/* ── TABS ── */
-.tabs {
-  display: flex;
-  gap: 5px;
-  margin-bottom: 24px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 14px;
-  padding: 5px;
-  border: 1px solid var(--border);
-}
-
-.tab-btn {
-  flex: 1;
-  padding: 9px 4px;
-  border: none;
-  border-radius: 10px;
-  background: transparent;
-  color: var(--muted);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  letter-spacing: 0.02em;
-}
-
-.tab-btn.active {
-  background: linear-gradient(135deg, var(--violet), var(--fuchsia));
-  color: #fff;
-}
-
-/* ── SECTIONS ── */
-.tab-section { display: none; }
-.tab-section.active { display: block; }
-
-/* ── INFO ── */
-.info-block {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 12px;
-}
-
-.info-block h3 {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 7px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.info-block p {
+/* ── INICIO ── */
+.hero-line {
   font-size: 13px;
   color: var(--soft);
   font-weight: 300;
-  line-height: 1.65;
-}
-
-/* ── CATALOG ── */
-.cat-label {
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 28px 0 11px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.cat-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-.product-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 17px;
-  margin-bottom: 9px;
-}
-
-.prod-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.prod-name {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.prod-num {
-  font-size: 10px;
-  color: var(--accent);
-  font-weight: 500;
-  background: rgba(192,132,252,0.12);
-  border-radius: 6px;
-  padding: 3px 8px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.prod-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 11px;
-}
-
-.meta-pill {
-  font-size: 11px;
-  color: var(--muted);
-  background: rgba(255,255,255,0.05);
-  border-radius: 7px;
-  padding: 3px 9px;
-  font-weight: 300;
-}
-
-.meta-pill b { color: var(--soft); font-weight: 500; }
-
-.prod-footer {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding-top: 11px;
-  border-top: 1px solid var(--border);
-}
-
-.prod-price {
-  font-size: 1.2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #c084fc, #e879f9);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
-}
-
-.prod-price-express {
-  font-size: 11px;
-  color: var(--muted);
-  font-weight: 300;
-  margin-top: 4px;
-}
-
-.prod-price-consult {
-  font-size: 13px;
-  color: var(--accent);
-  font-style: italic;
-}
-
-.prod-price-multi {
-  font-size: 12px;
-  color: var(--soft);
-  font-weight: 300;
-  line-height: 1.65;
-}
-
-.gift-tag {
-  font-size: 11px;
-  color: #a5f3fc;
-  background: rgba(165,243,252,0.07);
-  border: 1px solid rgba(165,243,252,0.16);
-  border-radius: 8px;
-  padding: 4px 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 2px;
-}
-
-/* ── CONTACT ── */
-.contact-detail {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding: 13px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-  color: var(--soft);
-}
-
-.contact-detail:last-child { border-bottom: none; }
-.contact-detail .ico { font-size: 1rem; }
-
-/* ── FLOATING WA ── */
-.float-wa {
-  position: fixed;
-  bottom: 22px; right: 18px;
-  z-index: 99;
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  background: #25D366;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
-  text-decoration: none;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-  animation: wa-pulse 3s ease-in-out infinite;
-}
-
-@keyframes wa-pulse {
-  0%,100% { box-shadow: 0 4px 18px rgba(37,211,102,0.38); }
-  50% { box-shadow: 0 4px 30px rgba(37,211,102,0.6); }
-}
-
-/* ── FOOTER ── */
-footer {
-  text-align: center;
-  padding: 36px 18px 76px;
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  position: relative;
-  z-index: 1;
-  border-top: 1px solid var(--border);
-  margin-top: 44px;
-}
-
-footer strong { color: var(--soft); }
-
-/* ── LOGO ── */
-.logo-circle {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(192,132,252,0.45);
-  box-shadow: 0 0 0 4px rgba(139,92,246,0.12);
-  margin-bottom: 18px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ── PRODUCT SHOWCASE IMAGE ── */
-.showcase {
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid var(--border);
   margin-bottom: 14px;
-  position: relative;
+  line-height: 1.5;
 }
-
-.showcase img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
-  max-height: 340px;
-}
-
-.showcase-caption {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(13,11,20,0.88) 0%, transparent 100%);
-  padding: 28px 16px 14px;
-  font-size: 12px;
-  color: var(--soft);
-  font-weight: 300;
-  letter-spacing: 0.04em;
-}
-
-/* ── CLIENTS CAROUSEL ── */
-.clients-wrap { margin-bottom: 12px; }
 
 .carousel {
   position: relative;
@@ -484,235 +217,451 @@ footer strong { color: var(--soft); }
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
-
 .carousel-track::-webkit-scrollbar { display: none; }
 
 .carousel-slide {
   flex: 0 0 100%;
   scroll-snap-align: center;
   aspect-ratio: 4 / 5;
+  max-height: 68vh;
   background: var(--card);
 }
 
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
+.carousel-slide img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
 .carousel-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 34px; height: 34px;
+  width: 38px; height: 38px;
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.22);
   background: rgba(13,11,20,0.55);
-  backdrop-filter: blur(4px);
   color: #fff;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
   cursor: pointer;
   z-index: 2;
 }
-
 .carousel-arrow.left { left: 10px; }
 .carousel-arrow.right { right: 10px; }
-.carousel-arrow:active { transform: translateY(-50%) scale(0.92); }
 
 .carousel-dots {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 12px;
+  margin: 12px 0 16px;
 }
 
 .carousel-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.25);
   border: none;
   padding: 0;
   cursor: pointer;
   transition: background 0.2s, width 0.2s;
 }
-
 .carousel-dot.active {
   background: linear-gradient(135deg, var(--violet), var(--fuchsia));
   width: 16px;
   border-radius: 4px;
 }
 
-/* ── GALERÍA CATÁLOGO ── */
-.catalog-header {
-  text-align: center;
-  padding: 40px 0 8px;
+.promo {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(217,70,239,0.15));
+  border: 1px solid rgba(217,70,239,0.28);
+  border-radius: 14px;
+  padding: 13px 16px;
+  font-size: 13px;
+  color: #e9d5ff;
+  line-height: 1.5;
+  margin-top: 12px;
 }
 
-.catalog-header .logo-circle { width: 60px; height: 60px; margin-bottom: 14px; }
-
-.catalog-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.7rem;
-  font-weight: 700;
-  margin-bottom: 4px;
+.showcase {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin: 22px 0 12px;
+  position: relative;
 }
-
-.catalog-subtitle {
+.showcase img { width: 100%; display: block; object-fit: cover; max-height: 340px; }
+.showcase-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(13,11,20,0.9) 0%, transparent 100%);
+  padding: 28px 16px 14px;
   font-size: 12px;
-  color: var(--muted);
-  font-weight: 300;
-  margin-bottom: 28px;
+  color: var(--soft);
 }
 
+.info-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 10px;
+}
+.info-block h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.info-block p { font-size: 13px; color: var(--soft); font-weight: 300; line-height: 1.65; }
+
+/* ── QUIÉNES SOMOS ── */
+.about-logo {
+  width: 84px; height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(192,132,252,0.45);
+  box-shadow: 0 0 0 5px rgba(139,92,246,0.12);
+  display: block;
+  margin: 6px 0 20px;
+}
+
+.about-text p {
+  font-size: 15px;
+  color: var(--soft);
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 14px;
+  max-width: 60ch;
+}
+
+.origin {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0 6px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.origin-word { font-family: 'Playfair Display', serif; font-size: 1.35rem; }
+.origin-word small { display: block; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--muted); font-weight: 300; }
+.origin-word.now { font-style: italic; }
+.origin-arrow { color: var(--accent); font-size: 1.3rem; }
+
+/* ── CATÁLOGO ── */
 .catalog-photo {
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--border);
   margin-bottom: 12px;
 }
-
-.catalog-photo img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.catalog-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-  margin: 26px 0 40px;
-}
-
-.btn-back {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--soft);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.btn-back:active { opacity: 0.8; }
+.catalog-photo img { width: 100%; display: block; }
 
 .btn-wa-cta {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 16px 16px;
+  padding: 16px;
   border-radius: 14px;
   border: 1px solid rgba(37,211,102,0.35);
   background: linear-gradient(135deg, rgba(37,211,102,0.22), rgba(37,211,102,0.12));
   color: #fff;
-  font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
+  margin: 22px 0 8px;
 }
 
-.btn-wa-cta:active { transform: scale(0.98); opacity: 0.9; }
+/* ── CONTACTO ── */
+.contact-list {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 4px 18px;
+  margin-bottom: 18px;
+}
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--soft);
+}
+.contact-detail:last-child { border-bottom: none; }
+.contact-detail .ico { font-size: 1rem; line-height: 1.5; }
 
-/* ── DESKTOP ── */
-@media (min-width: 700px) {
-  header { padding: 72px 0 56px; }
-  .brand-name { font-size: 3.2rem; }
-  .logo-circle { width: 82px; height: 82px; }
+/* ── PANEL LATERAL ── */
+.side {
+  position: fixed;
+  top: var(--top);
+  bottom: calc(var(--nav) + var(--safe-b));
+  right: 0;
+  width: min(88vw, 360px);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.28s ease;
+}
+.side.show { display: flex; }
+.side.open { transform: translateX(0); box-shadow: -12px 0 32px rgba(0,0,0,0.45); }
+
+.side-handle {
+  position: absolute;
+  left: -40px;
+  top: 28px;
+  width: 40px;
+  padding: 14px 0;
+  border: none;
+  border-radius: 12px 0 0 12px;
+  background: linear-gradient(180deg, var(--violet), var(--fuchsia));
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  writing-mode: vertical-rl;
+  cursor: pointer;
+  box-shadow: -4px 4px 14px rgba(0,0,0,0.35);
+}
+
+.side-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.side-head h2 { font-size: 15px; font-weight: 600; }
+.side-close {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--soft);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.side-body { flex: 1; overflow-y: auto; padding: 14px 16px; overscroll-behavior: contain; }
+
+/* reseñas */
+.review {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px 14px;
+  margin-bottom: 9px;
+}
+.review .stars { color: #f5c451; font-size: 13px; letter-spacing: 2px; }
+.review p { font-size: 13px; color: var(--soft); font-weight: 300; margin: 4px 0 6px; line-height: 1.55; }
+.review small { font-size: 11px; color: var(--muted); }
+
+.review-form {
+  border-top: 1px solid var(--border);
+  padding: 12px 16px 14px;
+  background: var(--panel);
+}
+.review-form label { font-size: 12px; color: var(--soft); display: block; margin-bottom: 6px; }
+.review-form textarea {
+  width: 100%;
+  min-height: 64px;
+  resize: none;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px; /* evita zoom en iOS */
+  padding: 9px 11px;
+}
+.star-pick { display: flex; gap: 2px; margin: 8px 0; }
+.star-pick button {
+  background: none; border: none; cursor: pointer;
+  font-size: 24px; line-height: 1; padding: 2px 3px;
+  color: rgba(255,255,255,0.25);
+}
+.star-pick button.on { color: #f5c451; }
+.review-form .send {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 11px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--violet), var(--fuchsia));
+  cursor: pointer;
+}
+.form-note { font-size: 11px; color: var(--muted); margin-top: 7px; min-height: 16px; }
+
+/* precios */
+.pr-group { font-size: 12px; font-weight: 600; color: var(--accent); margin: 16px 0 8px; }
+.pr-group:first-child { margin-top: 0; }
+.pr-note {
+  font-size: 11.5px;
+  color: #a5f3fc;
+  background: rgba(165,243,252,0.07);
+  border: 1px solid rgba(165,243,252,0.16);
+  border-radius: 9px;
+  padding: 7px 10px;
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+.pr {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.pr:last-child { border-bottom: none; }
+.pr b { font-size: 13px; font-weight: 600; line-height: 1.3; }
+.pr .n { font-size: 10px; color: var(--accent); margin-right: 6px; font-weight: 500; }
+.pr .meta { grid-column: 1; font-size: 11.5px; color: var(--muted); font-weight: 300; }
+.pr .price {
+  grid-column: 2; grid-row: 1 / span 2;
+  text-align: right;
+  font-size: 15px; font-weight: 700;
+  color: #e9b6ff;
+  white-space: nowrap;
+}
+.pr .price small { display: block; font-size: 10.5px; font-weight: 300; color: var(--muted); }
+.pr .price.consult { font-size: 12px; font-weight: 400; font-style: italic; color: var(--accent); white-space: normal; max-width: 110px; }
+
+/* ── WHATSAPP FLOTANTE ── */
+.float-wa {
+  position: fixed;
+  left: 14px;
+  bottom: calc(var(--nav) + var(--safe-b) + 14px);
+  z-index: 45;
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.35rem;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 30px 16px 28px;
+  color: var(--muted);
+  font-size: 11px;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  margin-top: 36px;
+}
+footer strong { color: var(--soft); }
+
+/* ── TABLET / ESCRITORIO ── */
+@media (min-width: 900px) {
+  :root { --top: 68px; --nav: 0px; }
+  body { padding-bottom: 0; }
+  .topbar { justify-content: space-between; padding: 0 28px; }
+  .nav {
+    position: static;
+    display: flex;
+    height: auto;
+    padding: 0;
+    border: none;
+    background: none;
+    gap: 6px;
+  }
+  .nav a { flex-direction: row; gap: 7px; padding: 8px 14px; border-radius: 10px; font-size: 13px; }
+  .nav svg { width: 17px; height: 17px; }
+  .nav a[aria-current="page"] { background: rgba(192,132,252,0.12); }
+  .float-wa { bottom: 20px; }
+  .side { bottom: 0; }
+}
+
+@media (min-width: 1100px) {
+  body.panel-open { padding-right: 360px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .side, .carousel-dot, .soc-btn { transition: none; }
+  .carousel-track { scroll-behavior: auto; }
 }
 </style>
 </head>
 <body>
 
-<a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" class="float-wa" aria-label="WhatsApp">💬</a>
+<header class="topbar">
+  <a class="brand" href="#inicio" aria-label="Estudio Gráfico Lumière, ir al inicio">
+    <img src="LOGO2.png" alt="">
+    <span>Estudio Gráfico <em>Lumière</em></span>
+  </a>
 
-<div class="container" id="mainView">
+  <nav class="nav" aria-label="Secciones">
+    <a href="#inicio" data-go="inicio">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+      Inicio
+    </a>
+    <a href="#quienes-somos" data-go="quienes-somos">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.7 0 4.5 1.8 4.5 4.5"/></svg>
+      Quiénes somos
+    </a>
+    <a href="#catalogo" data-go="catalogo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>
+      Catálogo
+    </a>
+    <a href="#contacto" data-go="contacto">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+      Contacto
+    </a>
+  </nav>
+</header>
 
-  <!-- HEADER -->
-  <header>
-    <img src="LOGO2.png" alt="Lumière Logo" class="logo-circle">
-    <div class="brand-tag">Córdoba Capital (Bº San Martín) · Argentina</div>
-    <h1 class="brand-name">Estudio Gráfico <em>Lumière</em></h1>
-    <p class="brand-sub">Diseño Gráfico - Cartelería - Remeras - Productos personalizados para eventos</p>
-    <div class="promo">
-      <span class="promo-icon">✨</span>
-      <span><strong>Envíos a todo el país a través de Vía Cargo</strong> Consultá por WhatsApp o Instagram.</span>
-    </div>
-  </header>
+<a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" rel="noopener" class="float-wa" aria-label="Escribinos por WhatsApp">💬</a>
 
-  <!-- SOCIAL -->
-  <div class="socials">
-    <a href="#" onclick="showCatalogGallery(); return false;" class="soc-btn soc-drive">
-      <div class="ico">📂</div>
-      <div class="lbl">
-        Catálogo <span class="drive-badge">Nuevo</span>
-        <small>Ver catálogo completo con fotos</small>
+<main class="container">
+
+  <!-- ═════════ INICIO ═════════ -->
+  <section id="inicio" class="view active" aria-label="Inicio">
+    <p class="hero-line">Diseño gráfico, cartelería, remeras y productos personalizados para eventos.</p>
+
+    <div class="carousel" id="clientsCarousel">
+      <div class="carousel-track" id="clientsTrack">
+        <div class="carousel-slide"><img src="1.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado"></div>
+        <div class="carousel-slide"><img src="2.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+        <div class="carousel-slide"><img src="3.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+        <div class="carousel-slide"><img src="4.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+        <div class="carousel-slide"><img src="5.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+        <div class="carousel-slide"><img src="6.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+        <div class="carousel-slide"><img src="7.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+        <div class="carousel-slide"><img src="8.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+        <div class="carousel-slide"><img src="9.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+        <div class="carousel-slide"><img src="10.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
       </div>
-      <span class="arrow">›</span>
-    </a>
-    <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" class="soc-btn soc-wa">
-      <div class="ico">💬</div>
-      <div class="lbl">WhatsApp <small>Catálogo completo y pedidos</small></div>
-      <span class="arrow">›</span>
-    </a>
-    <a href="https://www.instagram.com/estudiograficolumiere?igsh=OWk0cGRwZG8wZ3Vk" target="_blank" class="soc-btn soc-ig">
+      <button class="carousel-arrow left" onclick="carouselMove(-1)" aria-label="Foto anterior">‹</button>
+      <button class="carousel-arrow right" onclick="carouselMove(1)" aria-label="Foto siguiente">›</button>
+    </div>
+    <div class="carousel-dots" id="clientsDots"></div>
+
+    <a href="https://www.instagram.com/estudiograficolumiere?igsh=OWk0cGRwZG8wZ3Vk" target="_blank" rel="noopener" class="soc-btn soc-ig">
       <div class="ico">📸</div>
-      <div class="lbl">Instagram <small>@estudiograficolumiere</small></div>
+      <div class="lbl">Más fotos <small>Mirá más trabajos en @estudiograficolumiere</small></div>
       <span class="arrow">›</span>
     </a>
-    <a href="https://www.facebook.com/marketplace/profile/61582077473347/" target="_blank" class="soc-btn soc-fb">
-      <div class="ico">🛍️</div>
-      <div class="lbl">Facebook Marketplace <small>Ver perfil</small></div>
-      <span class="arrow">›</span>
-    </a>
-  </div>
 
-  <!-- TABS -->
-  <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('info', this)">Info</button>
-    <button class="tab-btn" onclick="showTab('catalogo', this)">Catálogo</button>
-    <button class="tab-btn" onclick="showTab('contacto', this)">Contacto</button>
-  </div>
-
-  <!-- INFO -->
-  <div id="info" class="tab-section active">
+    <div class="promo">
+      <span aria-hidden="true">✨</span>
+      <span><strong>Envíos a todo el país a través de Vía Cargo.</strong> Consultá por WhatsApp o Instagram.</span>
+    </div>
 
     <div class="showcase">
-      <img src="publicacion_1.png" alt="Marcos selfie y carteles personalizados — Estudio Gráfico Lumière">
+      <img src="publicacion_1.png" alt="Marcos selfie y carteles personalizados — Estudio Gráfico Lumière" loading="lazy">
       <div class="showcase-caption">Marcos selfie, carteles y props personalizados para tu momento especial</div>
-    </div>
-
-    <p class="cat-label">Nuestros Clientes</p>
-    <div class="clients-wrap">
-      <div class="carousel" id="clientsCarousel">
-        <div class="carousel-track" id="clientsTrack">
-          <div class="carousel-slide"><img src="1.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-          <div class="carousel-slide"><img src="2.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-          <div class="carousel-slide"><img src="3.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-          <div class="carousel-slide"><img src="4.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-          <div class="carousel-slide"><img src="5.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-          <div class="carousel-slide"><img src="6.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-          <div class="carousel-slide"><img src="7.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-          <div class="carousel-slide"><img src="8.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-          <div class="carousel-slide"><img src="9.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-          <div class="carousel-slide"><img src="10.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-        </div>
-        <button class="carousel-arrow left" onclick="carouselMove(-1)" aria-label="Foto anterior">‹</button>
-        <button class="carousel-arrow right" onclick="carouselMove(1)" aria-label="Foto siguiente">›</button>
-      </div>
-      <div class="carousel-dots" id="clientsDots"></div>
     </div>
 
     <div class="info-block">
@@ -724,388 +673,293 @@ footer strong { color: var(--soft); }
       <p>¿No encontrás lo que buscás? Podemos crear diseños a medida y sumar nuevas ideas a nuestro catálogo.</p>
     </div>
     <div class="info-block">
-      <h3>📦 Envíos a todo el país</h3>
+      <h3>🚚 Envíos a todo el país</h3>
       <p>¿No sos de Córdoba Capital? Envíos a todo el país a través de Vía Cargo, a cargo del comprador.</p>
     </div>
-  </div>
+  </section>
 
-  <!-- CATÁLOGO -->
-  <div id="catalogo" class="tab-section">
+  <!-- ═════════ QUIÉNES SOMOS ═════════ -->
+  <section id="quienes-somos" class="view" aria-label="Quiénes somos">
+    <img src="LOGO2.png" alt="Logo de Lumière" class="about-logo">
+    <h1 class="view-title">Quiénes somos</h1>
+    <div class="about-text">
+      <p>Somos un equipo de estudiantes jujeños en Córdoba.</p>
+      <p>Lumière comenzó como <strong>Rodela</strong>, el nombre que sus creadores, Gabriela y Rodrigo, le dieron al proyecto.</p>
+      <p>Hoy Lumière significa <strong>luz</strong>: cada pedido es un momento especial, dedicado al cliente.</p>
+    </div>
+    <div class="origin" aria-hidden="true">
+      <div class="origin-word">Rodela<small>el comienzo</small></div>
+      <div class="origin-arrow">→</div>
+      <div class="origin-word now">Lumière<small>luz</small></div>
+    </div>
+  </section>
 
-    <p class="cat-label">Marcos Selfie</p>
+  <!-- ═════════ CATÁLOGO ═════════ -->
+  <section id="catalogo" class="view" aria-label="Catálogo">
+    <a href="https://drive.google.com/drive/folders/1MTqab9Gnc58E50zkSnqYdjyJUHxtWOX7?usp=drive_link" target="_blank" rel="noopener" class="soc-btn soc-drive">
+      <div class="ico">📂</div>
+      <div class="lbl">Nuestros diseños <small>Carpeta de Google Drive con todos los modelos</small></div>
+      <span class="arrow">›</span>
+    </a>
 
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Marco Selfie Rectangular</div>
-        <span class="prod-num">01</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">📏 <b>60cm × 90cm</b></span>
-        <span class="meta-pill">⏱ <b>72hs.</b></span>
-      </div>
-      <div class="gift-tag">🎁 De regalo: 3 carteles de mano + marco reforzado / o 5 carteles de mano</div>
-      <div class="prod-footer">
-        <div>
-          <div class="prod-price">$35.000</div>
-          <div class="prod-price-express">⚡ Entrega en el día: $45.000</div>
-        </div>
-      </div>
+    <p class="section-label">Catálogo nuevo</p>
+    <div class="catalog-photo"><img src="CATALOGO1.png" alt="Catálogo Estudio Gráfico Lumière, página 1"></div>
+    <div class="catalog-photo"><img src="CATALOGO2.png" alt="Catálogo Estudio Gráfico Lumière, página 2" loading="lazy"></div>
+    <div class="catalog-photo"><img src="CATALOGO3.png" alt="Catálogo Estudio Gráfico Lumière, página 3" loading="lazy"></div>
+    <div class="catalog-photo"><img src="CATALOGO4.png" alt="Catálogo Estudio Gráfico Lumière, página 4" loading="lazy"></div>
+    <div class="catalog-photo"><img src="CATALOGO5.png" alt="Catálogo Estudio Gráfico Lumière, página 5" loading="lazy"></div>
+
+    <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" rel="noopener" class="btn-wa-cta">💬 Hacé tu consulta por WhatsApp</a>
+  </section>
+
+  <!-- ═════════ CONTACTO ═════════ -->
+  <section id="contacto" class="view" aria-label="Contacto">
+    <h1 class="view-title">Contacto</h1>
+
+    <div class="contact-list">
+      <div class="contact-detail"><span class="ico">📍</span><span>Bibliotecarios Argentinos 228 (esquina Famatina) · Barrio San Martín · Córdoba Capital, Argentina.</span></div>
+      <div class="contact-detail"><span class="ico">⏱</span><span>Demoras: en el día o 72 hs, según el producto.</span></div>
+      <div class="contact-detail"><span class="ico">📦</span><span>Catálogo completo disponible por WhatsApp.</span></div>
+      <div class="contact-detail"><span class="ico">✏️</span><span>Podemos crear lo que necesitás si no está en el catálogo.</span></div>
+      <div class="contact-detail"><span class="ico">🚚</span><span>Envíos a todo el país.</span></div>
     </div>
 
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Marco Selfie Circular</div>
-        <span class="prod-num">02</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">📏 <b>70cm × 80cm</b></span>
-        <span class="meta-pill">⏱ <b>72hs.</b></span>
-      </div>
-      <div class="gift-tag">🎁 De regalo: 3 carteles de mano + marco reforzado / o 5 carteles de mano</div>
-      <div class="prod-footer">
-        <div>
-          <div class="prod-price">$35.000</div>
-          <div class="prod-price-express">⚡ Entrega en el día: $45.000</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Marco Selfie Circular XL</div>
-        <span class="prod-num">03</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">📏 <b>90cm × 90cm</b></span>
-        <span class="meta-pill">⏱ <b>72hs.</b></span>
-      </div>
-      <div class="gift-tag">🎁 De regalo: 3 carteles de mano + marco reforzado / o 5 carteles de mano</div>
-      <div class="prod-footer">
-        <div>
-          <div class="prod-price">$50.000</div>
-          <div class="prod-price-express">⚡ Entrega en el día: $60.000</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Cartel Selfie Franja</div>
-        <span class="prod-num">04</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">📏 <b>100cm × 40cm</b></span>
-        <span class="meta-pill">⏱ <b>72hs.</b></span>
-      </div>
-      <div class="gift-tag">🎁 Entrega en el día: 3 carteles de mano</div>
-      <div class="prod-footer">
-        <div>
-          <div class="prod-price">$30.000</div>
-          <div class="prod-price-express">⚡ Entrega en el día: $40.000</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Marco Selfie Rectangular con Flores</div>
-        <span class="prod-num">12</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">📏 <b>60cm × 90cm</b></span>
-        <span class="meta-pill">⏱ <b>72hs.</b></span>
-      </div>
-      <div class="gift-tag">🎁 De regalo: 3 carteles de mano + marco reforzado / o 5 carteles de mano</div>
-      <div class="prod-footer">
-        <div>
-          <div class="prod-price">$55.000</div>
-          <div class="prod-price-express">⚡ Entrega en el día: $60.000</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Marco Selfie Circular con Flores</div>
-        <span class="prod-num">13</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">📏 <b>70cm × 80cm</b></span>
-        <span class="meta-pill">⏱ <b>72hs.</b></span>
-      </div>
-      <div class="gift-tag">🎁 De regalo: 3 carteles de mano + marco reforzado / o 5 carteles de mano</div>
-      <div class="prod-footer">
-        <div>
-          <div class="prod-price">$55.000</div>
-          <div class="prod-price-express">⚡ Entrega en el día: $60.000</div>
-        </div>
-      </div>
-    </div>
-
-    <p class="cat-label">Carteles de mano &amp; Props</p>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">8 Carteles de Mano – Props</div>
-        <span class="prod-num">05</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">📄 <b>300g</b></span>
-        <span class="meta-pill">⏱ <b>En el día</b></span>
-      </div>
-      <div class="prod-footer">
-        <div class="prod-price">$18.000</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Cartel de Mano – Por Unidad</div>
-        <span class="prod-num">06</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">📄 <b>300g</b></span>
-        <span class="meta-pill">⏱ <b>En el día</b></span>
-      </div>
-      <div class="prod-footer">
-        <div class="prod-price">$2.000</div>
-      </div>
-    </div>
-
-    <p class="cat-label">Bandas</p>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Banda Prediseñada</div>
-        <span class="prod-num">07</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">📏 <b>7cm × 2m</b></span>
-        <span class="meta-pill">⏱ <b>En el día</b></span>
-        <span class="meta-pill">Stock disponible</span>
-      </div>
-      <div class="prod-footer">
-        <div class="prod-price">$7.000</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Banda Personalizada</div>
-        <span class="prod-num">08</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">📏 <b>7cm × 2m</b></span>
-        <span class="meta-pill">⏱ <b>48–72hs.</b></span>
-        <span class="meta-pill">El diseño que desees</span>
-      </div>
-      <div class="prod-footer">
-        <div class="prod-price">$12.000</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Bandas por Mayor</div>
-        <span class="prod-num">09</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">⏱ <b>48–72hs.</b></span>
-        <span class="meta-pill">Personalizadas</span>
-      </div>
-      <div class="prod-footer">
-        <div class="prod-price-consult">Consultar — depende de la cantidad</div>
-      </div>
-    </div>
-
-    <p class="cat-label">Remeras</p>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Remera Personalizada</div>
-        <span class="prod-num">10</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">⏱ <b>48–72hs.</b></span>
-        <span class="meta-pill">Consultar talles y colores</span>
-      </div>
-      <div class="prod-footer">
-        <div class="prod-price">$20.000</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="prod-header">
-        <div class="prod-name">Remeras por Mayor</div>
-        <span class="prod-num">11</span>
-      </div>
-      <div class="prod-meta">
-        <span class="meta-pill">⏱ <b>48–72hs.</b></span>
-        <span class="meta-pill">Consultar talles y colores</span>
-      </div>
-      <div class="prod-footer">
-        <div class="prod-price-consult">Consultar — depende de la cantidad</div>
-      </div>
-    </div>
-
-  </div><!-- /catalogo -->
-
-  <!-- CONTACTO -->
-  <div id="contacto" class="tab-section">
-    <div class="info-block">
-      <h3>📍 Dónde estamos</h3>
-      <p>Bibliotecarios Argentinos 228 (esquina Famatina) - Barrio San Martín - Córdoba Capital, Argentina.</p>
-    </div>
-    <div class="info-block">
-      <div class="contact-detail">
-        <span class="ico">⏱</span>
-        <span>Demoras: en el día o 72hs. Según el producto</span>
-      </div>
-      <div class="contact-detail">
-        <span class="ico">📦</span>
-        <span>Catálogo completo disponible por WhatsApp</span>
-      </div>
-      <div class="contact-detail">
-        <span class="ico">✏️</span>
-        <span>Podemos crear lo que necesitás si no está en el catálogo</span>
-      </div>
-      <div class="contact-detail">
-        <span class="ico">🖨</span>
-        <span>Envíos a todo el país</span>
-      </div>
-    </div>
-    <div class="socials" style="margin-top:18px;margin-bottom:0">
-      <a href="#" onclick="showCatalogGallery(); return false;" class="soc-btn soc-drive">
-        <div class="ico">📂</div>
-        <div class="lbl">
-          Catálogo <span class="drive-badge">Nuevo</span>
-          <small>Ver catálogo completo con fotos</small>
-        </div>
-        <span class="arrow">›</span>
-      </a>
-      <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" class="soc-btn soc-wa">
-        <div class="ico">💬</div>
-        <div class="lbl">WhatsApp <small>Consultas y pedidos</small></div>
-        <span class="arrow">›</span>
-      </a>
-      <a href="https://www.instagram.com/estudiograficolumiere?igsh=OWk0cGRwZG8wZ3Vk" target="_blank" class="soc-btn soc-ig">
+    <div class="stack">
+      <a href="https://www.instagram.com/estudiograficolumiere?igsh=OWk0cGRwZG8wZ3Vk" target="_blank" rel="noopener" class="soc-btn soc-ig">
         <div class="ico">📸</div>
         <div class="lbl">Instagram <small>@estudiograficolumiere</small></div>
         <span class="arrow">›</span>
       </a>
-      <a href="https://www.facebook.com/marketplace/profile/61582077473347/" target="_blank" class="soc-btn soc-fb">
+      <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" rel="noopener" class="soc-btn soc-wa">
+        <div class="ico">💬</div>
+        <div class="lbl">WhatsApp <small>Consultas y pedidos</small></div>
+        <span class="arrow">›</span>
+      </a>
+      <a href="https://www.facebook.com/marketplace/profile/61582077473347/" target="_blank" rel="noopener" class="soc-btn soc-fb">
         <div class="ico">🛍️</div>
         <div class="lbl">Facebook Marketplace <small>Ver perfil</small></div>
         <span class="arrow">›</span>
       </a>
     </div>
+  </section>
+
+  <footer>
+    <strong>Estudio Gráfico Lumière</strong> · Córdoba Capital, Argentina<br>
+    <span style="display:block;margin-top:5px">Diseño Gráfico · Gabriela Farfan y Rodrigo Ortuño</span>
+  </footer>
+</main>
+
+<!-- ═════════ PANEL: RESEÑAS (Inicio) ═════════ -->
+<aside class="side" id="panelResenas" data-view="inicio" aria-label="Reseñas de clientes">
+  <button class="side-handle" type="button" aria-expanded="false" aria-controls="panelResenas">Reseñas</button>
+  <div class="side-head">
+    <h2>Reseñas de clientes</h2>
+    <button class="side-close" type="button">Ocultar</button>
   </div>
+  <div class="side-body" id="reviewList"></div>
+  <form class="review-form" id="reviewForm" novalidate>
+    <label for="reviewText">Dejá tu reseña (es anónima)</label>
+    <textarea id="reviewText" maxlength="240" placeholder="Contanos cómo fue tu experiencia"></textarea>
+    <div class="star-pick" id="starPick" role="radiogroup" aria-label="Puntaje"></div>
+    <button class="send" type="submit">Publicar reseña anónima</button>
+    <p class="form-note" id="formNote" aria-live="polite"></p>
+  </form>
+</aside>
 
-</div>
-
-<footer id="mainFooter">
-  <strong>Estudio Gráfico Lumière</strong> · Córdoba Capital, Argentina<br>
-  <span style="margin-top:5px;display:block">Diseño Gráfico · Gabriela Farfan y Rodrigo Ortuño</span>
-</footer>
-
-<!-- GALERÍA DE CATÁLOGO -->
-<div class="container" id="catalogGalleryView" style="display:none">
-
-  <div class="catalog-header">
-    <img src="LOGO2.png" alt="Lumière Logo" class="logo-circle">
-    <h2 class="catalog-title">Catálogo</h2>
-    <p class="catalog-subtitle">Estudio Gráfico Lumière</p>
+<!-- ═════════ PANEL: PRECIOS (Catálogo) ═════════ -->
+<aside class="side" id="panelPrecios" data-view="catalogo" aria-label="Productos y precios">
+  <button class="side-handle" type="button" aria-expanded="false" aria-controls="panelPrecios">Precios</button>
+  <div class="side-head">
+    <h2>Productos y precios</h2>
+    <button class="side-close" type="button">Ocultar</button>
   </div>
+  <div class="side-body">
 
-  <div class="catalog-photo"><img src="CATALOGO1.png" alt="Catálogo Estudio Gráfico Lumière 1" loading="lazy"></div>
-  <div class="catalog-photo"><img src="CATALOGO2.png" alt="Catálogo Estudio Gráfico Lumière 2" loading="lazy"></div>
-  <div class="catalog-photo"><img src="CATALOGO3.png" alt="Catálogo Estudio Gráfico Lumière 3" loading="lazy"></div>
-  <div class="catalog-photo"><img src="CATALOGO4.png" alt="Catálogo Estudio Gráfico Lumière 4" loading="lazy"></div>
-  <div class="catalog-photo"><img src="CATALOGO5.png" alt="Catálogo Estudio Gráfico Lumière 5" loading="lazy"></div>
+    <p class="pr-group">Marcos selfie</p>
+    <p class="pr-note">🎁 Los marcos 01, 02, 03, 12 y 13 incluyen de regalo 3 carteles de mano + marco reforzado, o 5 carteles de mano.</p>
 
-  <div class="catalog-actions">
-    <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" class="btn-wa-cta">💬 Hacé tu consulta a través de WhatsApp</a>
-    <button class="btn-back" onclick="volverInicio()">‹ Volver a la página principal</button>
+    <div class="pr"><b><span class="n">01</span>Marco Selfie Rectangular</b><span class="meta">60 × 90 cm · 72 hs</span><span class="price">$35.000<small>En el día $45.000</small></span></div>
+    <div class="pr"><b><span class="n">02</span>Marco Selfie Circular</b><span class="meta">70 × 80 cm · 72 hs</span><span class="price">$35.000<small>En el día $45.000</small></span></div>
+    <div class="pr"><b><span class="n">03</span>Marco Selfie Circular XL</b><span class="meta">90 × 90 cm · 72 hs</span><span class="price">$50.000<small>En el día $60.000</small></span></div>
+    <div class="pr"><b><span class="n">04</span>Cartel Selfie Franja</b><span class="meta">100 × 40 cm · 72 hs<br>🎁 Entrega en el día: 3 carteles de mano</span><span class="price">$30.000<small>En el día $40.000</small></span></div>
+    <div class="pr"><b><span class="n">12</span>Marco Selfie Rectangular con Flores</b><span class="meta">60 × 90 cm · 72 hs</span><span class="price">$55.000<small>En el día $60.000</small></span></div>
+    <div class="pr"><b><span class="n">13</span>Marco Selfie Circular con Flores</b><span class="meta">70 × 80 cm · 72 hs</span><span class="price">$55.000<small>En el día $60.000</small></span></div>
+
+    <p class="pr-group">Carteles de mano y props</p>
+    <div class="pr"><b><span class="n">05</span>8 Carteles de Mano – Props</b><span class="meta">300 g · En el día</span><span class="price">$18.000</span></div>
+    <div class="pr"><b><span class="n">06</span>Cartel de Mano – Por unidad</b><span class="meta">300 g · En el día</span><span class="price">$2.000</span></div>
+
+    <p class="pr-group">Bandas</p>
+    <div class="pr"><b><span class="n">07</span>Banda Prediseñada</b><span class="meta">7 cm × 2 m · En el día · Stock disponible</span><span class="price">$7.000</span></div>
+    <div class="pr"><b><span class="n">08</span>Banda Personalizada</b><span class="meta">7 cm × 2 m · 48–72 hs · El diseño que desees</span><span class="price">$12.000</span></div>
+    <div class="pr"><b><span class="n">09</span>Bandas por Mayor</b><span class="meta">48–72 hs · Personalizadas</span><span class="price consult">Consultar, depende de la cantidad</span></div>
+
+    <p class="pr-group">Remeras</p>
+    <div class="pr"><b><span class="n">10</span>Remera Personalizada</b><span class="meta">48–72 hs · Consultar talles y colores</span><span class="price">$20.000</span></div>
+    <div class="pr"><b><span class="n">11</span>Remeras por Mayor</b><span class="meta">48–72 hs · Consultar talles y colores</span><span class="price consult">Consultar, depende de la cantidad</span></div>
   </div>
-
-</div>
+</aside>
 
 <script>
-function showTab(id, btn) {
-  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-}
+/* ── NAVEGACIÓN ENTRE SECCIONES ── */
+var VIEWS = ['inicio', 'quienes-somos', 'catalogo', 'contacto'];
+var wide = window.matchMedia('(min-width: 1100px)');
+var panelState = {};   // recuerda si cada panel está abierto o cerrado
 
-/* ── GALERÍA DE CATÁLOGO ── */
-function showCatalogGallery() {
-  document.getElementById('mainView').style.display = 'none';
-  document.getElementById('mainFooter').style.display = 'none';
-  document.getElementById('catalogGalleryView').style.display = 'block';
+function go(id) {
+  if (VIEWS.indexOf(id) === -1) id = 'inicio';
+  document.querySelectorAll('.view').forEach(function (v) { v.classList.toggle('active', v.id === id); });
+  document.querySelectorAll('.nav a').forEach(function (a) {
+    if (a.dataset.go === id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
+  document.querySelectorAll('.side').forEach(function (p) {
+    var show = p.dataset.view === id;
+    p.classList.toggle('show', show);
+    if (show && !(p.id in panelState)) panelState[p.id] = wide.matches; // abierto por defecto solo en pantallas anchas
+    setPanel(p, !!panelState[p.id]);
+  });
   window.scrollTo(0, 0);
 }
 
-function volverInicio() {
-  document.getElementById('catalogGalleryView').style.display = 'none';
-  document.getElementById('mainView').style.display = 'block';
-  document.getElementById('mainFooter').style.display = 'block';
-  window.scrollTo(0, 0);
+window.addEventListener('hashchange', function () { go(location.hash.slice(1)); });
+
+/* ── PANELES LATERALES (se pueden ocultar) ── */
+function setPanel(p, open) {
+  panelState[p.id] = open;
+  p.classList.toggle('open', open);
+  p.querySelector('.side-handle').setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.body.classList.toggle('panel-open', open && p.classList.contains('show'));
 }
 
-/* ── CLIENTS CAROUSEL ── */
+document.querySelectorAll('.side').forEach(function (p) {
+  p.querySelector('.side-handle').addEventListener('click', function () { setPanel(p, !p.classList.contains('open')); });
+  p.querySelector('.side-close').addEventListener('click', function () { setPanel(p, false); });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Escape') return;
+  var p = document.querySelector('.side.show.open');
+  if (p) setPanel(p, false);
+});
+
+/* ── RESEÑAS ── */
+/* Reseñas de ejemplo: reemplazalas por opiniones reales de tus clientes. */
+var SEED_REVIEWS = [
+  { s: 5, t: 'Los marcos selfie fueron el centro de la fiesta. Llegaron en tiempo y forma y quedaron hermosos.' },
+  { s: 5, t: 'Pedí las bandas personalizadas para mi cumple y quedaron exactamente como las imaginé. Súper atentos a cada detalle.' },
+  { s: 5, t: 'Excelente atención por WhatsApp: me ayudaron a elegir el diseño y respondieron rapidísimo.' },
+  { s: 5, t: 'Los carteles de mano fueron un éxito, todos se sacaron fotos con ellos. Muy recomendables.' },
+  { s: 5, t: 'Hicimos remeras para el grupo de egresados y la calidad es genial. El diseño quedó impecable.' },
+  { s: 5, t: 'Me olvidé de encargar a tiempo y con la entrega en el día me salvaron el evento. ¡Gracias!' },
+  { s: 5, t: 'Se nota el cariño en cada pedido. Todo prolijo y con muy buena terminación.' },
+  { s: 5, t: 'Me hicieron un diseño a medida que no estaba en el catálogo y quedé fascinada.' },
+  { s: 4, t: 'Muy buenos precios para la calidad que entregan. Volvería a pedir sin dudarlo.' },
+  { s: 5, t: 'Me llegó a otra provincia sin problemas y en perfecto estado. Muy buena comunicación en todo momento.' }
+];
+
+var STORE_KEY = 'lumiere_resenas';
+var userReviews = [];
+try { userReviews = JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch (e) { userReviews = []; }
+
+function starsText(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
+
+function renderReviews() {
+  var list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  userReviews.concat(SEED_REVIEWS).forEach(function (r) {
+    var d = document.createElement('div');
+    d.className = 'review';
+    var st = document.createElement('div'); st.className = 'stars'; st.textContent = starsText(r.s);
+    st.setAttribute('aria-label', r.s + ' de 5 estrellas');
+    var p = document.createElement('p'); p.textContent = r.t;
+    var who = document.createElement('small'); who.textContent = 'Cliente anónimo';
+    d.appendChild(st); d.appendChild(p); d.appendChild(who);
+    list.appendChild(d);
+  });
+}
+
+var rating = 5;
+var starPick = document.getElementById('starPick');
+function renderStarPick() {
+  starPick.innerHTML = '';
+  for (var i = 1; i <= 5; i++) {
+    (function (n) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = '★';
+      b.className = n <= rating ? 'on' : '';
+      b.setAttribute('role', 'radio');
+      b.setAttribute('aria-checked', n === rating ? 'true' : 'false');
+      b.setAttribute('aria-label', n + (n === 1 ? ' estrella' : ' estrellas'));
+      b.addEventListener('click', function () { rating = n; renderStarPick(); });
+      starPick.appendChild(b);
+    })(i);
+  }
+}
+
+document.getElementById('reviewForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var ta = document.getElementById('reviewText');
+  var note = document.getElementById('formNote');
+  var text = ta.value.trim();
+  if (text.length < 10) { note.textContent = 'Escribí al menos 10 caracteres.'; return; }
+  userReviews.unshift({ s: rating, t: text });
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(userReviews.slice(0, 20))); } catch (err) {}
+  ta.value = '';
+  note.textContent = '¡Gracias por tu reseña!';
+  renderReviews();
+  document.getElementById('reviewList').scrollTop = 0;
+});
+
+renderReviews();
+renderStarPick();
+
+/* ── CARRUSEL DE CLIENTES ── */
 (function () {
-  const track = document.getElementById('clientsTrack');
-  const dotsWrap = document.getElementById('clientsDots');
+  var track = document.getElementById('clientsTrack');
+  var dotsWrap = document.getElementById('clientsDots');
   if (!track || !dotsWrap) return;
+  var slides = track.querySelectorAll('.carousel-slide');
 
-  const slides = track.querySelectorAll('.carousel-slide');
-
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
+  slides.forEach(function (_, i) {
+    var dot = document.createElement('button');
     dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
     dot.setAttribute('aria-label', 'Ir a la foto ' + (i + 1));
-    dot.addEventListener('click', () => {
+    dot.addEventListener('click', function () {
       slides[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     });
     dotsWrap.appendChild(dot);
   });
+  var dots = dotsWrap.querySelectorAll('.carousel-dot');
 
-  const dots = dotsWrap.querySelectorAll('.carousel-dot');
-
-  function updateActiveDot() {
-    const trackRect = track.getBoundingClientRect();
-    const center = trackRect.left + trackRect.width / 2;
-    let closest = 0;
-    let minDist = Infinity;
-    slides.forEach((slide, i) => {
-      const r = slide.getBoundingClientRect();
-      const dist = Math.abs((r.left + r.width / 2) - center);
-      if (dist < minDist) { minDist = dist; closest = i; }
+  function currentIndex() {
+    var tr = track.getBoundingClientRect();
+    var center = tr.left + tr.width / 2;
+    var closest = 0, min = Infinity;
+    slides.forEach(function (s, i) {
+      var r = s.getBoundingClientRect();
+      var d = Math.abs((r.left + r.width / 2) - center);
+      if (d < min) { min = d; closest = i; }
     });
-    dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+    return closest;
   }
 
-  let scrollTimeout;
-  track.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(updateActiveDot, 80);
+  var t;
+  track.addEventListener('scroll', function () {
+    clearTimeout(t);
+    t = setTimeout(function () {
+      var c = currentIndex();
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === c); });
+    }, 80);
   });
 
   window.carouselMove = function (dir) {
-    const trackRect = track.getBoundingClientRect();
-    const center = trackRect.left + trackRect.width / 2;
-    let current = 0;
-    let minDist = Infinity;
-    slides.forEach((slide, i) => {
-      const r = slide.getBoundingClientRect();
-      const dist = Math.abs((r.left + r.width / 2) - center);
-      if (dist < minDist) { minDist = dist; current = i; }
-    });
-    const next = Math.min(Math.max(current + dir, 0), slides.length - 1);
+    var next = Math.min(Math.max(currentIndex() + dir, 0), slides.length - 1);
     slides[next].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
   };
 })();
+
+/* ── ARRANQUE ── */
+go(location.hash.slice(1));
 </script>
 </body>
 </html>
