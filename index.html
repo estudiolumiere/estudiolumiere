@@ -760,6 +760,7 @@ footer strong { color: var(--soft); }
   <form class="review-form" id="reviewForm" novalidate>
     <label for="reviewText">Dejá tu reseña (es anónima)</label>
     <textarea id="reviewText" maxlength="240" placeholder="Contanos cómo fue tu experiencia"></textarea>
+    <input type="text" id="reviewHp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
     <div class="star-pick" id="starPick" role="radiogroup" aria-label="Puntaje"></div>
     <button class="send" type="submit">Publicar reseña anónima</button>
     <p class="form-note" id="formNote" aria-live="polite"></p>
@@ -776,9 +777,9 @@ footer strong { color: var(--soft); }
   <div class="side-body">
 
     <p class="pr-group">Marcos selfie</p>
-    <p class="pr-note">🎁 Los marcos 01, 02, 03, 12 y 13 incluyen de regalo 3 carteles de mano.</p>
+    <p class="pr-note">🎁 Los marcos 01, 02, 03, 12 y 13 incluyen de regalo 3 carteles de mano + marco reforzado, o 5 carteles de mano.</p>
 
-    <div class="pr"><b><span class="n">01</span>Marco Selfie Rectangular Prediseñado</b><span class="meta">60 × 90 cm · 72 hs</span><span class="price">$35.000<small>En el día $7.000 adicional</small></span></div>
+   <div class="pr"><b><span class="n">01</span>Marco Selfie Rectangular Prediseñado</b><span class="meta">60 × 90 cm · 72 hs</span><span class="price">$35.000<small>En el día $7.000 adicional</small></span></div>
     <div class="pr"><b><span class="n">02</span>Marco Selfie Circular Prediseñado</b><span class="meta">70 × 80 cm · 72 hs</span><span class="price">$35.000<small>En el día $7.000 adicional</small></span></div>
     <div class="pr"><b><span class="n">03</span>Marco Selfie Circular XL Prediseñado</b><span class="meta">90 × 90 cm · 72 hs</span><span class="price">$55.000<small>En el día $7.000 adicional</small></span></div>
     <div class="pr"><b><span class="n">04</span>Cartel Selfie Franja</b><span class="meta">100 × 40 cm · 72 hs</span><span class="price">$30.000<small>En el día $10.000 adicional</small></span></div>
@@ -786,16 +787,16 @@ footer strong { color: var(--soft); }
     <div class="pr"><b><span class="n">13</span>Marco Selfie Circular con Flores</b><span class="meta">70 × 80 cm · 72 hs</span><span class="price">$60.000<small>En el día $7.000 adicional</small></span></div>
 
     <p class="pr-group">Carteles de mano y props</p>
-    <div class="pr"><b><span class="n">05</span>8 Carteles de Mano – Props</b><span class="meta">En el día</span><span class="price">$20.000</span></div>
-    <div class="pr"><b><span class="n">06</span>Cartel de Mano – Por unidad</b><span class="meta">En el día</span><span class="price">$2.500</span></div>
+    <div class="pr"><b><span class="n">05</span>8 Carteles de Mano – Props</b><span class="meta">300 g · En el día</span><span class="price">$18.000</span></div>
+    <div class="pr"><b><span class="n">06</span>Cartel de Mano – Por unidad</b><span class="meta">300 g · En el día</span><span class="price">$2.000</span></div>
 
     <p class="pr-group">Bandas</p>
     <div class="pr"><b><span class="n">07</span>Banda Prediseñada</b><span class="meta">7 cm × 2 m · En el día · Stock disponible</span><span class="price">$7.000</span></div>
     <div class="pr"><b><span class="n">08</span>Banda Personalizada</b><span class="meta">7 cm × 2 m · 48–72 hs · El diseño que desees</span><span class="price">$12.000</span></div>
-    <div class="pr"><b><span class="n">09</span>Bandas por Mayor</b><span class="meta">72 hs · Personalizadas</span><span class="price consult">Consultar, depende de la cantidad</span></div>
+    <div class="pr"><b><span class="n">09</span>Bandas por Mayor</b><span class="meta">48–72 hs · Personalizadas</span><span class="price consult">Consultar, depende de la cantidad</span></div>
 
     <p class="pr-group">Remeras</p>
-    <div class="pr"><b><span class="n">10</span>Remera Personalizada</b><span class="meta">48–72 hs · Consultar talles y colores</span><span class="price">$25.000</span></div>
+    <div class="pr"><b><span class="n">10</span>Remera Personalizada</b><span class="meta">48–72 hs · Consultar talles y colores</span><span class="price">$20.000</span></div>
     <div class="pr"><b><span class="n">11</span>Remeras por Mayor</b><span class="meta">48–72 hs · Consultar talles y colores</span><span class="price consult">Consultar, depende de la cantidad</span></div>
   </div>
 </aside>
@@ -856,16 +857,74 @@ var SEED_REVIEWS = [
   { s: 5, t: 'Me llegó a otra provincia sin problemas y en perfecto estado. Muy buena comunicación en todo momento.' }
 ];
 
+/* ═══ CONFIGURACIÓN DE RESEÑAS (completá estos 4 datos, ver instrucciones) ═══
+   Mientras estén vacíos, las reseñas nuevas solo se ven en el dispositivo de quien las escribe. */
+var REVIEWS_CONFIG = {
+  formUrl:      'https://docs.google.com/forms/d/e/1FAIpQLScPY88GtE2HuehKkCbSjB08QniAoY8GvHkHaJII9SGkRONXUg/formResponse',
+  entryText:    'entry.347719522',    // pregunta "Reseña"
+  entryRating:  'entry.1191581055',   // pregunta "Puntaje"
+  sheetCsvUrl:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vR0QOEsyCd1ep0Hd57qhUWFzOhsL4f3HYBRIWvVeD1-gJuTaXnjcMx215rxeoInpffiwUBSeDAbC0S7/pub?gid=1195063982&single=true&output=csv'
+};
+
 var STORE_KEY = 'lumiere_resenas';
-var userReviews = [];
-try { userReviews = JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch (e) { userReviews = []; }
+var userReviews = [];   // solo se usa si el formulario aún no está configurado
+var realReviews = [];   // reseñas aprobadas que vienen de la hoja de Google
+var formReady = REVIEWS_CONFIG.formUrl.indexOf('/formResponse') > -1 && !!REVIEWS_CONFIG.entryText && !!REVIEWS_CONFIG.entryRating;
+if (!formReady) {
+  try { userReviews = JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch (e) { userReviews = []; }
+}
+
+function parseCSV(t) {
+  var rows = [], row = [], f = '', q = false, i, c;
+  for (i = 0; i < t.length; i++) {
+    c = t[i];
+    if (q) {
+      if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; }
+      else f += c;
+    } else if (c === '"') q = true;
+    else if (c === ',') { row.push(f); f = ''; }
+    else if (c === '\n' || c === '\r') {
+      if (c === '\r' && t[i + 1] === '\n') i++;
+      row.push(f); rows.push(row); row = []; f = '';
+    } else f += c;
+  }
+  if (f !== '' || row.length) { row.push(f); rows.push(row); }
+  return rows;
+}
+
+function loadApprovedReviews() {
+  if (!REVIEWS_CONFIG.sheetCsvUrl) return;
+  fetch(REVIEWS_CONFIG.sheetCsvUrl)
+    .then(function (r) { return r.text(); })
+    .then(function (txt) {
+      var rows = parseCSV(txt);
+      if (rows.length < 2) return;
+      var h = rows[0].map(function (x) { return x.trim().toLowerCase(); });
+      function col(prefix, fallback) {
+        for (var i = 0; i < h.length; i++) if (h[i].indexOf(prefix) === 0) return i;
+        return fallback;
+      }
+      var cT = col('rese', 1), cS = col('puntaje', 2), cA = col('aprobad', 3);
+      var out = [];
+      rows.slice(1).forEach(function (r) {
+        var ok = /^(si|sí|s|x|ok|1|true)$/i.test((r[cA] || '').trim());
+        var t = (r[cT] || '').trim();
+        if (!ok || !t) return;
+        var s = parseInt(r[cS], 10);
+        out.push({ s: (s >= 1 && s <= 5) ? s : 5, t: t.slice(0, 240) });
+      });
+      realReviews = out.reverse().slice(0, 30);
+      renderReviews();
+    })
+    .catch(function () { /* si falla, quedan las reseñas de ejemplo */ });
+}
 
 function starsText(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
 
 function renderReviews() {
   var list = document.getElementById('reviewList');
   list.innerHTML = '';
-  userReviews.concat(SEED_REVIEWS).forEach(function (r) {
+  userReviews.concat(realReviews.length ? realReviews : SEED_REVIEWS).forEach(function (r) {
     var d = document.createElement('div');
     d.className = 'review';
     var st = document.createElement('div'); st.className = 'stars'; st.textContent = starsText(r.s);
@@ -896,12 +955,33 @@ function renderStarPick() {
   }
 }
 
+var lastSent = 0;
 document.getElementById('reviewForm').addEventListener('submit', function (e) {
   e.preventDefault();
   var ta = document.getElementById('reviewText');
   var note = document.getElementById('formNote');
   var text = ta.value.trim();
+  if (document.getElementById('reviewHp').value) return;            // anti-spam
   if (text.length < 10) { note.textContent = 'Escribí al menos 10 caracteres.'; return; }
+  if (Date.now() - lastSent < 30000) { note.textContent = 'Esperá unos segundos antes de enviar otra.'; return; }
+
+  if (formReady) {
+    var body = new URLSearchParams();
+    body.append(REVIEWS_CONFIG.entryText, text);
+    body.append(REVIEWS_CONFIG.entryRating, String(rating));
+    note.textContent = 'Enviando…';
+    fetch(REVIEWS_CONFIG.formUrl, { method: 'POST', mode: 'no-cors', body: body })
+      .then(function () {
+        lastSent = Date.now();
+        ta.value = '';
+        note.textContent = '¡Gracias! Vamos a publicar tu reseña después de revisarla.';
+      })
+      .catch(function () { note.textContent = 'No se pudo enviar. Revisá tu conexión e intentá de nuevo.'; });
+    return;
+  }
+
+  /* Sin formulario configurado: queda solo en este dispositivo */
+  lastSent = Date.now();
   userReviews.unshift({ s: rating, t: text });
   try { localStorage.setItem(STORE_KEY, JSON.stringify(userReviews.slice(0, 20))); } catch (err) {}
   ta.value = '';
@@ -912,6 +992,7 @@ document.getElementById('reviewForm').addEventListener('submit', function (e) {
 
 renderReviews();
 renderStarPick();
+loadApprovedReviews();
 
 /* ── CARRUSEL DE CLIENTES ── */
 (function () {
