@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffdab8">
 <meta name="p:domain_verify" content="a5b4509080052b2669ab2cfc33ff02cd"/>
 <title>Estudio Gráfico Lumière · Córdoba, Argentina</title>
 <meta name="description" content="Somos Gabriela y Rodrigo, realizamos servicios de diseño gráfico, cartelería, remeras y productos personalizados para eventos. Córdoba Capital, envíos a todo el país.">
@@ -14,16 +15,18 @@
 html { scroll-behavior: smooth; }
 
 :root {
-  --bg: #0d0b14;
-  --panel: #161222;
-  --card: rgba(255,255,255,0.04);
-  --border: rgba(255,255,255,0.09);
-  --violet: #8b5cf6;
-  --fuchsia: #d946ef;
-  --accent: #c084fc;
-  --white: #ffffff;
-  --muted: rgba(255,255,255,0.55);
-  --soft: rgba(255,255,255,0.78);
+  --bg: #ffe5cc;
+  --bar: #ffdab8;
+  --panel: #fff1e3;
+  --card: rgba(255,255,255,0.55);
+  --border: rgba(154,52,18,0.16);
+  --orange-deep: #ea580c;
+  --orange: #f97316;
+  --orange-light: #fb923c;
+  --accent: #c2410c;
+  --ink: #3b1d0a;
+  --muted: rgba(59,29,10,0.62);
+  --soft: rgba(59,29,10,0.85);
   --top: 56px;
   --nav: 64px;
   --safe-b: env(safe-area-inset-bottom, 0px);
@@ -32,7 +35,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
-  color: var(--white);
+  color: var(--ink);
   min-height: 100vh;
   font-size: 15px;
   line-height: 1.6;
@@ -44,13 +47,13 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139,92,246,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(217,70,239,0.10) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(251,146,60,0.40) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(253,186,116,0.45) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
 
-a:focus-visible, button:focus-visible {
+a:focus-visible, button:focus-visible, summary:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -69,7 +72,7 @@ a:focus-visible, button:focus-visible {
   top: 0;
   z-index: 60;
   height: var(--top);
-  background: var(--bg);
+  background: var(--bar);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -81,14 +84,14 @@ a:focus-visible, button:focus-visible {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--white);
+  color: var(--ink);
 }
 
 .brand img {
   width: 34px; height: 34px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid rgba(192,132,252,0.5);
+  border: 1.5px solid rgba(253,186,116,0.55);
 }
 
 .brand span {
@@ -98,17 +101,15 @@ a:focus-visible, button:focus-visible {
   line-height: 1.1;
 }
 
-.brand span em { font-style: italic; font-weight: 400; }
-
 .nav {
   position: fixed;
   left: 0; right: 0; bottom: 0;
   height: calc(var(--nav) + var(--safe-b));
   padding-bottom: var(--safe-b);
-  background: var(--bg);
+  background: var(--bar);
   border-top: 1px solid var(--border);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   z-index: 60;
 }
 
@@ -120,8 +121,10 @@ a:focus-visible, button:focus-visible {
   gap: 3px;
   color: var(--muted);
   text-decoration: none;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 500;
+  text-align: center;
+  line-height: 1.15;
 }
 
 .nav svg {
@@ -161,7 +164,7 @@ a:focus-visible, button:focus-visible {
   font-size: 14px;
   font-weight: 500;
   border: 1px solid transparent;
-  color: var(--white);
+  color: var(--ink);
   transition: transform 0.18s, opacity 0.18s;
 }
 
@@ -181,15 +184,15 @@ a:focus-visible, button:focus-visible {
 
 .soc-wa  { background: rgba(37,211,102,0.09); border-color: rgba(37,211,102,0.24); }
 .soc-wa .ico { background: rgba(37,211,102,0.16); }
-.soc-ig  { background: rgba(217,70,239,0.09); border-color: rgba(217,70,239,0.24); }
-.soc-ig .ico { background: rgba(217,70,239,0.16); }
+.soc-ig  { background: rgba(244,63,94,0.09); border-color: rgba(244,63,94,0.24); }
+.soc-ig .ico { background: rgba(244,63,94,0.16); }
 .soc-fb  { background: rgba(99,130,246,0.09); border-color: rgba(99,130,246,0.24); }
 .soc-fb .ico { background: rgba(99,130,246,0.16); }
 .soc-drive {
-  background: linear-gradient(135deg, rgba(139,92,246,0.22), rgba(217,70,239,0.16));
-  border-color: rgba(192,132,252,0.4);
+  background: linear-gradient(135deg, rgba(249,115,22,0.24), rgba(251,146,60,0.14));
+  border-color: rgba(253,186,116,0.42);
 }
-.soc-drive .ico { background: linear-gradient(135deg, rgba(139,92,246,0.35), rgba(217,70,239,0.25)); }
+.soc-drive .ico { background: linear-gradient(135deg, rgba(249,115,22,0.38), rgba(251,146,60,0.24)); }
 
 .stack { display: flex; flex-direction: column; gap: 11px; }
 
@@ -236,7 +239,7 @@ a:focus-visible, button:focus-visible {
   width: 38px; height: 38px;
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.22);
-  background: rgba(13,11,20,0.55);
+  background: rgba(18,11,7,0.55);
   color: #fff;
   font-size: 1.2rem;
   display: flex; align-items: center; justify-content: center;
@@ -257,14 +260,14 @@ a:focus-visible, button:focus-visible {
 .carousel-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.25);
+  background: rgba(59,29,10,0.22);
   border: none;
   padding: 0;
   cursor: pointer;
   transition: background 0.2s, width 0.2s;
 }
 .carousel-dot.active {
-  background: linear-gradient(135deg, var(--violet), var(--fuchsia));
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange-light));
   width: 16px;
   border-radius: 4px;
 }
@@ -273,12 +276,12 @@ a:focus-visible, button:focus-visible {
   display: flex;
   align-items: flex-start;
   gap: 9px;
-  background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(217,70,239,0.15));
-  border: 1px solid rgba(217,70,239,0.28);
+  background: linear-gradient(135deg, rgba(249,115,22,0.22), rgba(251,146,60,0.14));
+  border: 1px solid rgba(251,146,60,0.30);
   border-radius: 14px;
   padding: 13px 16px;
   font-size: 13px;
-  color: #e9d5ff;
+  color: #7c2d12;
   line-height: 1.5;
   margin-top: 12px;
 }
@@ -294,10 +297,10 @@ a:focus-visible, button:focus-visible {
 .showcase-caption {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(13,11,20,0.9) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(40,15,0,0.85) 0%, transparent 100%);
   padding: 28px 16px 14px;
   font-size: 12px;
-  color: var(--soft);
+  color: #fff;
 }
 
 .info-block {
@@ -315,8 +318,8 @@ a:focus-visible, button:focus-visible {
   width: 84px; height: 84px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(192,132,252,0.45);
-  box-shadow: 0 0 0 5px rgba(139,92,246,0.12);
+  border: 2px solid rgba(253,186,116,0.5);
+  box-shadow: 0 0 0 5px rgba(249,115,22,0.14);
   display: block;
   margin: 6px 0 20px;
 }
@@ -362,14 +365,80 @@ a:focus-visible, button:focus-visible {
   gap: 10px;
   padding: 16px;
   border-radius: 14px;
-  border: 1px solid rgba(37,211,102,0.35);
-  background: linear-gradient(135deg, rgba(37,211,102,0.22), rgba(37,211,102,0.12));
-  color: #fff;
+  border: 1px solid rgba(22,163,74,0.45);
+  background: linear-gradient(135deg, rgba(37,211,102,0.34), rgba(37,211,102,0.20));
+  color: #064e3b;
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   margin: 22px 0 8px;
 }
+
+/* ── PREGUNTAS FRECUENTES ── */
+.faq-intro {
+  font-size: 13px;
+  color: var(--soft);
+  font-weight: 300;
+  margin-bottom: 16px;
+  max-width: 60ch;
+}
+
+.faq { display: flex; flex-direction: column; gap: 10px; }
+
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s, background 0.2s;
+}
+.faq-item[open] {
+  border-color: rgba(251,146,60,0.38);
+  background: linear-gradient(135deg, rgba(249,115,22,0.14), rgba(255,255,255,0.55));
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-item summary::after {
+  content: '+';
+  flex-shrink: 0;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  color: #fff;
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange-light));
+  transition: transform 0.2s;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+
+.faq-a { padding: 0 16px 16px; }
+.faq-a p, .faq-a li {
+  font-size: 13.5px;
+  color: var(--soft);
+  font-weight: 300;
+  line-height: 1.7;
+}
+.faq-a p + p, .faq-a p + ul, .faq-a ul + p { margin-top: 10px; }
+.faq-a ul { padding-left: 18px; }
+.faq-a li { margin-bottom: 4px; }
+.faq-a li::marker { color: var(--orange-light); }
+.faq-a strong { color: var(--ink); font-weight: 600; }
+.faq-a a { color: var(--accent); }
 
 /* ── CONTACTO ── */
 .contact-list {
@@ -407,7 +476,7 @@ a:focus-visible, button:focus-visible {
   transition: transform 0.28s ease;
 }
 .side.show { display: flex; }
-.side.open { transform: translateX(0); box-shadow: -12px 0 32px rgba(0,0,0,0.45); }
+.side.open { transform: translateX(0); box-shadow: -12px 0 32px rgba(120,53,15,0.22); }
 
 .side-handle {
   position: absolute;
@@ -417,7 +486,7 @@ a:focus-visible, button:focus-visible {
   padding: 14px 0;
   border: none;
   border-radius: 12px 0 0 12px;
-  background: linear-gradient(180deg, var(--violet), var(--fuchsia));
+  background: linear-gradient(180deg, var(--orange-deep), var(--orange-light));
   color: #fff;
   font-family: inherit;
   font-size: 13px;
@@ -457,7 +526,7 @@ a:focus-visible, button:focus-visible {
   padding: 13px 14px;
   margin-bottom: 9px;
 }
-.review .stars { color: #f5c451; font-size: 13px; letter-spacing: 2px; }
+.review .stars { color: #d97706; font-size: 13px; letter-spacing: 2px; }
 .review p { font-size: 13px; color: var(--soft); font-weight: 300; margin: 4px 0 6px; line-height: 1.55; }
 .review small { font-size: 11px; color: var(--muted); }
 
@@ -473,8 +542,8 @@ a:focus-visible, button:focus-visible {
   resize: none;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.05);
-  color: #fff;
+  background: rgba(255,255,255,0.8);
+  color: var(--ink);
   font-family: inherit;
   font-size: 16px; /* evita zoom en iOS */
   padding: 9px 11px;
@@ -483,9 +552,9 @@ a:focus-visible, button:focus-visible {
 .star-pick button {
   background: none; border: none; cursor: pointer;
   font-size: 24px; line-height: 1; padding: 2px 3px;
-  color: rgba(255,255,255,0.25);
+  color: rgba(59,29,10,0.22);
 }
-.star-pick button.on { color: #f5c451; }
+.star-pick button.on { color: #f59e0b; }
 .review-form .send {
   width: 100%;
   border: none;
@@ -495,7 +564,7 @@ a:focus-visible, button:focus-visible {
   font-size: 14px;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(135deg, var(--violet), var(--fuchsia));
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange-light));
   cursor: pointer;
 }
 .form-note { font-size: 11px; color: var(--muted); margin-top: 7px; min-height: 16px; }
@@ -505,9 +574,9 @@ a:focus-visible, button:focus-visible {
 .pr-group:first-child { margin-top: 0; }
 .pr-note {
   font-size: 11.5px;
-  color: #a5f3fc;
-  background: rgba(165,243,252,0.07);
-  border: 1px solid rgba(165,243,252,0.16);
+  color: #9a3412;
+  background: rgba(251,191,36,0.16);
+  border: 1px solid rgba(251,191,36,0.20);
   border-radius: 9px;
   padding: 7px 10px;
   margin-bottom: 8px;
@@ -528,7 +597,7 @@ a:focus-visible, button:focus-visible {
   grid-column: 2; grid-row: 1 / span 2;
   text-align: right;
   font-size: 15px; font-weight: 700;
-  color: #e9b6ff;
+  color: #c2410c;
   white-space: nowrap;
 }
 .pr .price small { display: block; font-size: 10.5px; font-weight: 300; color: var(--muted); }
@@ -578,7 +647,7 @@ footer strong { color: var(--soft); }
   }
   .nav a { flex-direction: row; gap: 7px; padding: 8px 14px; border-radius: 10px; font-size: 13px; }
   .nav svg { width: 17px; height: 17px; }
-  .nav a[aria-current="page"] { background: rgba(192,132,252,0.12); }
+  .nav a[aria-current="page"] { background: rgba(234,88,12,0.12); }
   .float-wa { bottom: 20px; }
   .side { bottom: 0; }
 }
@@ -589,7 +658,7 @@ footer strong { color: var(--soft); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .side, .carousel-dot, .soc-btn { transition: none; }
+  .side, .carousel-dot, .soc-btn, .faq-item, .faq-item summary::after { transition: none; }
   .carousel-track { scroll-behavior: auto; }
 }
 </style>
@@ -599,7 +668,7 @@ footer strong { color: var(--soft); }
 <header class="topbar">
   <a class="brand" href="#inicio" aria-label="Estudio Gráfico Lumière, ir al inicio">
     <img src="LOGO2.png" alt="">
-    <span>ESTUDIO GRÁFICO LUMIÈRE</em></span>
+    <span>ESTUDIO GRÁFICO LUMIÈRE</span>
   </a>
 
   <nav class="nav" aria-label="Secciones">
@@ -614,6 +683,10 @@ footer strong { color: var(--soft); }
     <a href="#catalogo" data-go="catalogo">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>
       Catálogo
+    </a>
+    <a href="#preguntas" data-go="preguntas">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><path d="M12 17h.01"/></svg>
+      Preguntas
     </a>
     <a href="#contacto" data-go="contacto">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
@@ -712,6 +785,99 @@ footer strong { color: var(--soft); }
     <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" rel="noopener" class="btn-wa-cta">💬 Hacé tu consulta por WhatsApp</a>
   </section>
 
+  <!-- ═════════ PREGUNTAS FRECUENTES ═════════ -->
+  <section id="preguntas" class="view" aria-label="Preguntas frecuentes">
+    <h1 class="view-title">Preguntas frecuentes</h1>
+    <p class="faq-intro">Tocá una pregunta para ver la respuesta. Si te queda alguna duda, escribinos por WhatsApp.</p>
+
+    <div class="faq">
+
+      <details class="faq-item">
+        <summary>¿Qué productos hacen?</summary>
+        <div class="faq-a">
+          <p>Realizamos productos personalizados para eventos: marcos selfie, bandas, carteles de mano, carteles redondos, stickers, remeras, entre otros, para cumpleaños, egresados, recibidas, eventos corporativos y celebraciones.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Dónde están ubicados?</summary>
+        <div class="faq-a">
+          <p>Estamos en barrio San Martín. Colocá en el GPS <strong>Bibliotecarios Argentinos 225</strong> o la esquina <strong>Famatina 270</strong> para no desorientarte.</p>
+          <p><a href="https://www.google.com/maps/search/?api=1&query=Bibliotecarios+Argentinos+225+C%C3%B3rdoba+Argentina" target="_blank" rel="noopener">Ver en Google Maps</a></p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Hacen envíos?</summary>
+        <div class="faq-a">
+          <p>Podés solicitar un Uber y enviarnos el recorrido o indicarnos cuando estés cerca. La dirección para el Uber es <strong>Famatina 270</strong>, así el Uber no se desorienta.</p>
+          <p>Si no sos de Córdoba Capital, hacemos envíos a todo el país a través de Vía Cargo, a cargo del comprador.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Cómo puedo pagar?</summary>
+        <div class="faq-a">
+          <p>Se abona por transferencia: primero se seña el <strong>50%</strong> y, una vez terminado el pedido, se abona el resto.</p>
+          <p>Los pedidos deben abonarse en su totalidad cuando estén listos, aunque no se retiren en el día.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Con cuánto tiempo de anticipación tengo que hacer el pedido?</summary>
+        <div class="faq-a">
+          <p>Lo ideal es consultar con anticipación, especialmente para pedidos grandes o que incluyen producción de varios productos. Estos son los plazos habituales:</p>
+          <ul>
+            <li><strong>Marco selfie:</strong> 72 hs, a prueba de agua.</li>
+            <li><strong>Marco selfie en 24 hs:</strong> con costo adicional, no es a prueba de agua.</li>
+            <li><strong>Banda prediseñada:</strong> en el día (frases disponibles en el acto).</li>
+            <li><strong>Banda personalizada:</strong> 48 a 72 hs.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Hacen productos personalizados?</summary>
+        <div class="faq-a">
+          <p>Sí. Podemos adaptar diseños, colores, textos y temáticas según el evento y la idea del cliente.</p>
+          <p>El diseño debe definirse durante las primeras 24 hs. Una vez confirmado ya no se realizan modificaciones, porque el pedido pasa a impresión.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Cómo hago un pedido?</summary>
+        <div class="faq-a">
+          <p>Podés escribirnos por <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" rel="noopener">WhatsApp</a> o por <a href="https://www.instagram.com/estudiograficolumiere?igsh=OWk0cGRwZG8wZ3Vk" target="_blank" rel="noopener">Instagram</a> indicando qué producto necesitás, cantidad, fecha del evento y, si tenés, una idea o referencia del diseño.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Puedo combinar varios productos en un mismo pedido?</summary>
+        <div class="faq-a">
+          <p>Sí. Podemos armar propuestas y aplicar descuentos, por ejemplo: marco selfie + carteles + remera.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Puedo enviar mi propio diseño?</summary>
+        <div class="faq-a">
+          <p>Sí. Te pedimos <strong>no usar IA</strong>, ya que no sale en la resolución correcta. Usá programas o páginas web de diseño.</p>
+          <p>Controlamos el tamaño del archivo, ya que la impresión es a gran escala.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Puedo elegir los colores?</summary>
+        <div class="faq-a">
+          <p>Sí, dependiendo del producto. Podemos adaptar la paleta de colores para que combine con la temática del evento.</p>
+        </div>
+      </details>
+
+    </div>
+
+    <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" rel="noopener" class="btn-wa-cta">💬 ¿Otra duda? Escribinos por WhatsApp</a>
+  </section>
+
   <!-- ═════════ CONTACTO ═════════ -->
   <section id="contacto" class="view" aria-label="Contacto">
     <h1 class="view-title">Contacto</h1>
@@ -803,7 +969,7 @@ footer strong { color: var(--soft); }
 
 <script>
 /* ── NAVEGACIÓN ENTRE SECCIONES ── */
-var VIEWS = ['inicio', 'quienes-somos', 'catalogo', 'contacto'];
+var VIEWS = ['inicio', 'quienes-somos', 'catalogo', 'preguntas', 'contacto'];
 var wide = window.matchMedia('(min-width: 1100px)');
 var panelState = {};   // recuerda si cada panel está abierto o cerrado
 
