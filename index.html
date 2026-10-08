@@ -569,39 +569,100 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .form-note { font-size: 12.5px; color: var(--muted); margin-top: 7px; min-height: 16px; }
 
-/* precios */
-.pr-group { font-size: 13.5px; font-weight: 600; color: var(--accent); margin: 16px 0 8px; }
-.pr-group:first-child { margin-top: 0; }
-.pr-note {
-  font-size: 13px;
-  color: #9a3412;
-  background: rgba(251,191,36,0.16);
-  border: 1px solid rgba(251,191,36,0.20);
-  border-radius: 9px;
-  padding: 7px 10px;
-  margin-bottom: 8px;
-  line-height: 1.45;
+/* ── CATÁLOGO: avisos, pasos y grilla de productos ── */
+.notice {
+  background: linear-gradient(135deg, rgba(249,115,22,0.22), rgba(251,146,60,0.14));
+  border: 1px solid rgba(251,146,60,0.40);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 18px 0 12px;
 }
-.pr {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2px 10px;
-  padding: 10px 0;
+.notice h2 { font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 8px; }
+.notice ul { list-style: none; }
+.notice li { font-size: 14.5px; color: var(--soft); line-height: 1.55; padding: 3px 0; }
+.notice li strong { color: var(--ink); font-weight: 600; }
+.notice .disc {
+  font-size: 14.5px;
+  color: var(--soft);
+  line-height: 1.55;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.cat-head {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  margin: 28px 0 10px;
+}
+
+.steps {
+  counter-reset: step;
+  list-style: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 4px 16px;
+}
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 12px 0 12px 40px;
   border-bottom: 1px solid var(--border);
+  font-size: 14.5px;
+  color: var(--soft);
+  line-height: 1.6;
 }
-.pr:last-child { border-bottom: none; }
-.pr b { font-size: 14.5px; font-weight: 600; line-height: 1.3; }
-.pr .n { font-size: 11.5px; color: var(--accent); margin-right: 6px; font-weight: 500; }
-.pr .meta { grid-column: 1; font-size: 13px; color: var(--muted); font-weight: 400; }
-.pr .price {
-  grid-column: 2; grid-row: 1 / span 2;
-  text-align: right;
-  font-size: 16px; font-weight: 700;
-  color: #9a3412;
-  white-space: nowrap;
+.steps li:last-child { border-bottom: none; }
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0; top: 12px;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--orange-deep), var(--orange-light));
 }
-.pr .price small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); }
-.pr .price.consult { font-size: 13px; font-weight: 400; font-style: italic; color: var(--accent); white-space: normal; max-width: 110px; }
+.steps li strong { color: var(--ink); font-weight: 600; }
+
+.cat-sub { font-size: 13.5px; font-weight: 600; color: var(--accent); margin: 18px 0 8px; }
+.prod-list { display: flex; flex-direction: column; gap: 10px; }
+
+.prod {
+  display: grid;
+  grid-template-columns: 84px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px;
+}
+.prod-img {
+  width: 84px; height: 84px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(249,115,22,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.9rem;
+}
+.prod-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.prod-body h3 { font-size: 15px; font-weight: 600; line-height: 1.3; margin-bottom: 2px; }
+.prod-body p { font-size: 13.5px; color: var(--muted); font-weight: 400; line-height: 1.45; }
+.prod-price { text-align: right; font-size: 16px; font-weight: 700; color: #9a3412; white-space: nowrap; }
+.prod-price small { display: block; font-size: 11.5px; font-weight: 400; color: var(--muted); }
+.prod-price.consult { font-size: 13px; font-weight: 400; font-style: italic; color: var(--accent); white-space: normal; max-width: 96px; }
+
+@media (max-width: 440px) {
+  .prod { grid-template-columns: 72px 1fr; align-items: start; }
+  .prod-img { width: 72px; height: 72px; font-size: 1.6rem; }
+  .prod-price { grid-column: 2; text-align: left; }
+  .prod-price.consult { max-width: none; }
+}
 
 /* ── WHATSAPP FLOTANTE ── */
 .float-wa {
@@ -780,12 +841,32 @@ footer strong { color: var(--soft); }
       <span class="arrow">›</span>
     </a>
 
-    <p class="section-label">Catálogo nuevo</p>
-    <div class="catalog-photo"><img src="CATALOGO1.png" alt="Catálogo Estudio Gráfico Lumière, página 1"></div>
-    <div class="catalog-photo"><img src="CATALOGO2.png" alt="Catálogo Estudio Gráfico Lumière, página 2" loading="lazy"></div>
-    <div class="catalog-photo"><img src="CATALOGO3.png" alt="Catálogo Estudio Gráfico Lumière, página 3" loading="lazy"></div>
-    <div class="catalog-photo"><img src="CATALOGO4.png" alt="Catálogo Estudio Gráfico Lumière, página 4" loading="lazy"></div>
-    <div class="catalog-photo"><img src="CATALOGO5.png" alt="Catálogo Estudio Gráfico Lumière, página 5" loading="lazy"></div>
+    <div class="notice" role="note">
+      <h2>⚠️ ATENCIÓN · DEMORAS</h2>
+      <ul>
+        <li>💧 <strong>Carteles a prueba de agua:</strong> 5 días.</li>
+        <li>📄 <strong>Carteles de papel 120 gramos:</strong> 2 días.</li>
+        <li>🎨 <strong>Otros productos personalizados:</strong> 3 días.</li>
+      </ul>
+      <p class="disc">Si llevás varios productos aplicamos descuentos personalizados. Si llevás por cantidad, también aplicamos descuentos personalizados.</p>
+    </div>
+
+    <h2 class="cat-head">¿Cómo es el proceso?</h2>
+    <ol class="steps">
+      <li><strong>Brindamos información</strong> sobre productos, medidas y diseños.</li>
+      <li><strong>Se seña la mitad</strong> para iniciar el diseño.</li>
+      <li>Una vez definido el diseño <strong>se manda a impresión y empieza a correr el tiempo de demora</strong>. Cuanto más tardes en elegir el diseño, más tiempo demora en estar listo el pedido.</li>
+      <li><strong>Te enviamos una foto</strong> del pedido listo.</li>
+      <li><strong>Se termina de pagar</strong> cuando el pedido ya está listo. Algunas personas dejan su marco para retirar después de un mes y no hay problema, siempre que se abone el total una vez finalizado el trabajo.</li>
+      <li><strong>Retirá en nuestra dirección</strong> (en el GPS colocá <strong>Famatina 270</strong>, esquina Famatina y pasaje Bibliotecarios Argentinos) o a través de <strong>Uber auto</strong> (marcos selfie o carteles grandes). El <strong>Uber moto</strong> es solo para productos pequeños (remeras, tutú, bandas, otros).</li>
+    </ol>
+
+    <div id="productGrid"></div>
+
+    <div class="info-block" style="margin-top:22px">
+      <h3>✨ Otros productos</h3>
+      <p>Consultanos para introducir nuevas creaciones: si no encontrás lo que buscás, lo diseñamos para vos.</p>
+    </div>
 
     <a href="https://wa.me/message/HWFF3ILZJZHCL1" target="_blank" rel="noopener" class="btn-wa-cta">💬 Hacé tu consulta por WhatsApp</a>
   </section>
@@ -936,40 +1017,6 @@ footer strong { color: var(--soft); }
     <button class="send" type="submit">Publicar reseña anónima</button>
     <p class="form-note" id="formNote" aria-live="polite"></p>
   </form>
-</aside>
-
-<!-- ═════════ PANEL: PRECIOS (Catálogo) ═════════ -->
-<aside class="side" id="panelPrecios" data-view="catalogo" aria-label="Productos y precios">
-  <button class="side-handle" type="button" aria-expanded="false" aria-controls="panelPrecios">Precios</button>
-  <div class="side-head">
-    <h2>Productos y precios</h2>
-    <button class="side-close" type="button">Ocultar</button>
-  </div>
-  <div class="side-body">
-
-    <p class="pr-group">Marcos selfie</p>
-    <p class="pr-note">🎁 Los marcos 01, 02, 03, 12 y 13 incluyen de regalo 3 carteles de mano + marco reforzado, o 5 carteles de mano.</p>
-
-   <div class="pr"><b><span class="n">01</span>Marco Selfie Rectangular Prediseñado</b><span class="meta">60 × 90 cm · 72 hs</span><span class="price">$35.000<small>En el día $7.000 adicional</small></span></div>
-    <div class="pr"><b><span class="n">02</span>Marco Selfie Circular Prediseñado</b><span class="meta">70 × 80 cm · 72 hs</span><span class="price">$35.000<small>En el día $7.000 adicional</small></span></div>
-    <div class="pr"><b><span class="n">03</span>Marco Selfie Circular XL Prediseñado</b><span class="meta">90 × 90 cm · 72 hs</span><span class="price">$55.000<small>En el día $7.000 adicional</small></span></div>
-    <div class="pr"><b><span class="n">04</span>Cartel Selfie Franja</b><span class="meta">100 × 40 cm · 72 hs</span><span class="price">$30.000<small>En el día $10.000 adicional</small></span></div>
-    <div class="pr"><b><span class="n">12</span>Marco Selfie Rectangular con Flores</b><span class="meta">60 × 90 cm · 72 hs</span><span class="price">$70.000<small>En el día $7.000 adicional</small></span></div>
-    <div class="pr"><b><span class="n">13</span>Marco Selfie Circular con Flores</b><span class="meta">70 × 80 cm · 72 hs</span><span class="price">$70.000<small>En el día $7.000 adicional</small></span></div>
-
-    <p class="pr-group">Carteles de mano y props</p>
-    <div class="pr"><b><span class="n">05</span>8 Carteles de Mano – Props</b><span class="meta">300 g · En el día</span><span class="price">$20.000</span></div>
-    <div class="pr"><b><span class="n">06</span>Cartel de Mano – Por unidad</b><span class="meta">300 g · En el día</span><span class="price">$2.500</span></div>
-
-    <p class="pr-group">Bandas</p>
-    <div class="pr"><b><span class="n">07</span>Banda Prediseñada</b><span class="meta">7 cm × 2 m · En el día · Stock disponible</span><span class="price">$7.000</span></div>
-    <div class="pr"><b><span class="n">08</span>Banda Personalizada</b><span class="meta">7 cm × 2 m · 48–72 hs · El diseño que desees</span><span class="price">$12.000</span></div>
-    <div class="pr"><b><span class="n">09</span>Bandas por Mayor</b><span class="meta">48–72 hs · Personalizadas</span><span class="price consult">Consultar, depende de la cantidad</span></div>
-
-    <p class="pr-group">Remeras</p>
-    <div class="pr"><b><span class="n">10</span>Remera Personalizada</b><span class="meta">48–72 hs · Consultar talles y colores</span><span class="price">$22.000</span></div>
-    <div class="pr"><b><span class="n">11</span>Remeras por Mayor</b><span class="meta">48–72 hs · Consultar talles y colores</span><span class="price consult">Consultar, depende de la cantidad</span></div>
-  </div>
 </aside>
 
 <script>
@@ -1209,6 +1256,114 @@ loadApprovedReviews();
     slides[next].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
   };
 })();
+
+/* ── CATÁLOGO: PRODUCTOS ──
+   Para cambiar un precio o un texto, editá esta lista.
+   img: número de la foto → busca PRODUCTO{n}.png (o .jpg). Si no hay foto, se muestra el ícono (ico).
+   price: null = "Consultar".  extra: texto chico debajo del precio. */
+var CATALOG = [
+  { title: 'Cartelería', groups: [
+    { name: null, items: [
+      { img: 1, ico: '🪧', name: 'Cartel franja', desc: 'Diseñado por nosotros (ver diseños). Medida 100 × 40 cm.', price: '$30.000' },
+      { img: 2, ico: '🖼️', name: 'Marco selfie', desc: 'Diseñado por nosotros (ver diseños). Rectangular 90 × 60 cm o circular 70 cm. 3 carteles de mano de regalo.', price: '$35.000' },
+      { img: 3, ico: '⭕', name: 'Marco selfie circular grande', desc: 'Diseñado por nosotros (ver diseños). Circular 1 m. 3 carteles de mano de regalo.', price: '$55.000' },
+      { img: 4, ico: '📐', name: 'Medidas especiales y otros materiales', desc: 'Consultanos medidas especiales y otros materiales.', price: null }
+    ]},
+    { name: 'Adicionales', items: [
+      { ico: '🛡️', name: 'Reforzado', desc: 'Marco reforzado.', price: 'Sin costo' },
+      { img: 4, ico: '✏️', name: 'Personalizado simple', desc: '1 diseño: podés indicarnos colores, letras y elementos.', price: '+$5.000' },
+      { img: 5, ico: '🎨', name: 'Servicio de diseño gráfico', desc: 'Replicamos en alta calidad imágenes de IA. Recreamos solo hasta 2 diseños.', price: '+$10.000' },
+      { img: 6, ico: '⏱️', name: 'Diseño gráfico ilimitado (12 horas)', desc: 'Servicio de diseño gráfico ilimitado durante 12 horas.', price: '$15.000' },
+      { img: 7, ico: '🌸', name: 'Flores artificiales', desc: 'Flores artificiales para decorar tu marco.', price: '+$30.000' },
+      { img: 8, ico: '⚡', name: 'Listo en el día', desc: 'No es a prueba de agua. Impresión de alta calidad en papel 120 gr.', price: '+$10.000' }
+    ]}
+  ]},
+  { title: 'Estampados', groups: [
+    { name: null, items: [
+      { img: 9,  ico: '👕', name: 'Remera, 1 estampado', desc: 'Hasta talle XL.', price: '$22.000' },
+      { img: 10, ico: '👕', name: 'Remera, 1 estampado', desc: 'Desde talle XXL.', price: '$28.000' },
+      { img: 11, ico: '🎗️', name: 'Banda, nuestros diseños', desc: '7 cm de ancho × 2 metros de largo.', price: '$7.000' },
+      { img: 12, ico: '🎗️', name: 'Banda personalizada', desc: '7 cm de ancho × 2 metros de largo.', price: '$12.000' }
+    ]},
+    { name: 'Adicionales', items: [
+      { img: 13, ico: '👕', name: 'Remera doble estampado', desc: 'Sumá un segundo estampado a tu remera.', price: '+$4.000' },
+      { ico: '📏', name: 'Más largo de banda', desc: 'Podés añadir hasta 1 metro más.', price: '+$1.000' }
+    ]}
+  ]},
+  { title: 'Recibidas, casamientos y baby shower', groups: [
+    { name: null, items: [
+      { img: 14, ico: '🩰', name: 'Tutú', desc: 'Hasta talle 44.', price: '$13.000' },
+      { img: 15, ico: '👑', name: 'Vincha con flores y piedrería', desc: 'Vincha decorada con flores y piedrería.', price: '$15.000' },
+      { img: 16, ico: '🪧', name: 'Carteles de mano', desc: 'Precio por unidad.', price: '$2.500' },
+      { img: 17, ico: '🐶', name: 'Tutú para mascotas', desc: 'Medida personalizada.', price: '$8.000' },
+      { img: 18, ico: '🐾', name: 'Bandana personalizada para mascotas', desc: 'Personalizada a tu gusto.', price: '$12.000' }
+    ]}
+  ]},
+  { title: 'Impresiones', groups: [
+    { name: null, items: [
+      { img: 19, ico: '⭐', name: 'Stickers sin corte', desc: 'Diseño e impresión. Plancha de 32 × 47 cm.', price: '$9.000' },
+      { img: 20, ico: '🎓', name: 'Diplomas', desc: 'Diseño e impresión. Papel 200 gr, tamaño A4. Descuentos por cantidad.', price: '$2.500' }
+    ]}
+  ]}
+];
+
+var IMG_EXT = ['png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG'];
+
+function fillProductImage(box, p) {
+  var ph = document.createElement('span');
+  ph.setAttribute('aria-hidden', 'true');
+  ph.textContent = p.ico;
+  box.appendChild(ph);
+  if (!p.img) return;
+  var i = 0, img = new Image();
+  img.alt = p.name;
+  img.onload = function () { box.textContent = ''; box.appendChild(img); };
+  img.onerror = function () {
+    i++;
+    if (i < IMG_EXT.length) img.src = 'PRODUCTO' + p.img + '.' + IMG_EXT[i];
+  };
+  img.src = 'PRODUCTO' + p.img + '.' + IMG_EXT[0];
+}
+
+function renderCatalog() {
+  var root = document.getElementById('productGrid');
+  if (!root) return;
+  CATALOG.forEach(function (sec) {
+    var h = document.createElement('h2');
+    h.className = 'cat-head';
+    h.textContent = sec.title;
+    root.appendChild(h);
+    sec.groups.forEach(function (g) {
+      if (g.name) {
+        var sub = document.createElement('p');
+        sub.className = 'cat-sub';
+        sub.textContent = g.name;
+        root.appendChild(sub);
+      }
+      var list = document.createElement('div');
+      list.className = 'prod-list';
+      g.items.forEach(function (p) {
+        var row = document.createElement('article');
+        row.className = 'prod';
+        var box = document.createElement('div');
+        box.className = 'prod-img';
+        fillProductImage(box, p);
+        var body = document.createElement('div');
+        body.className = 'prod-body';
+        var t = document.createElement('h3'); t.textContent = p.name;
+        var d = document.createElement('p'); d.textContent = p.desc;
+        body.appendChild(t); body.appendChild(d);
+        var pr = document.createElement('div');
+        pr.className = 'prod-price' + (p.price ? '' : ' consult');
+        pr.textContent = p.price || 'Consultar';
+        row.appendChild(box); row.appendChild(body); row.appendChild(pr);
+        list.appendChild(row);
+      });
+      root.appendChild(list);
+    });
+  });
+}
+renderCatalog();
 
 /* ── ARRANQUE ── */
 go(location.hash.slice(1));
