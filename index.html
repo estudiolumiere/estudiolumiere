@@ -762,7 +762,7 @@ footer strong { color: var(--soft); }
 
   <!-- ═════════ INICIO ═════════ -->
   <section id="inicio" class="view active" aria-label="Inicio">
-    <p class="hero-line">Somos Gabriela y Rodrigo, realizamos servicios de diseño gráfico, cartelería, remeras y productos personalizados para eventos.</p>
+    <p class="hero-line">Somos Gabriela y Rodrigo, realizamos servicios de diseño gráfico, cartelería, remeras y productos personalizados para eventos. Te atendemos por Marketplace Facebook, Instagram y Whatsapp. Las ventas únicamente se efectuán por WhatsApp.</p>
 
     <div class="carousel" id="clientsCarousel">
       <div class="carousel-track" id="clientsTrack">
@@ -799,7 +799,7 @@ footer strong { color: var(--soft); }
     </div>
 
     <div class="info-block">
-      <h3>📦 Catálogo disponible y actualizado</h3>
+      <h3>📦 Catálogo disponible y actualizado en nuestra página</h3>
       <p>Los productos mostrados son los más pedidos. Llevando varios productos tenés descuentos personalizados.</p>
     </div>
     <div class="info-block">
@@ -818,6 +818,7 @@ footer strong { color: var(--soft); }
     <h1 class="view-title">Quiénes somos</h1>
     <div class="about-text">
       <p>Somos un equipo de estudiantes jujeños en Córdoba.</p>
+      <p>Actualmente nos encontramos en zona norte, en barrio San Martín</p>
       <p>Lumière comenzó como <strong>Rodela</strong>, el nombre que sus creadores, Gabriela y Rodrigo, le dieron al proyecto.</p>
       <p>Hoy Lumière significa <strong>luz</strong>: cada pedido es un momento especial, dedicado al cliente.</p>
     </div>
@@ -837,18 +838,19 @@ footer strong { color: var(--soft); }
     </a>
 
     <div class="notice" role="note">
-      <h2>⚠️ ATENCIÓN · DEMORAS</h2>
+      <h2>⚠️ ATENCIÓN · DEMORAS (LEER)</h2>
       <ul>
         <li>💧 <strong>Carteles a prueba de agua:</strong> 5 días hábiles.</li>
         <li>📄 <strong>Carteles de papel 120 gramos base de plástico, no a prueba de agua:</strong> 3 días hábiles.</li>
-        <li>🎨 <strong>Otros productos personalizados:</strong> 3 días hábiles.</li>
+        <li>📄 <strong>Carteles EN EL DÍA CON ADICIONAL DE $12.000 (NO a prueba de agua):</strong> EN EL DÍA.</li>
+        <li>🎨 <strong>Otros productos personalizados:</strong> 4 días hábiles.</li>
       </ul>
       <p class="disc">Si llevás varios productos aplicamos descuentos personalizados. Si llevás por cantidad, también aplicamos descuentos personalizados.</p>
     </div>
 
     <h2 class="cat-head">¿Cómo es el proceso?</h2>
     <ol class="steps">
-      <li><strong>Brindamos información</strong> sobre productos, medidas y diseños.</li>
+      <li><strong>Brindamos información y te compartimos este catálogo,</strong> podrás ver productos, medidas y diseños.</li>
       <li><strong>Se seña la mitad</strong> para iniciar el diseño.</li>
       <li>Una vez definido el diseño <strong>se manda a impresión y empieza a correr el tiempo de demora</strong>. Cuanto más tardes en elegir el diseño, más tiempo demora en estar listo el pedido.</li>
       <li><strong>Te enviamos una foto</strong> del pedido listo.</li>
@@ -1059,16 +1061,16 @@ document.addEventListener('keydown', function (e) {
 /* ── RESEÑAS ── */
 /* Reseñas de ejemplo: reemplazalas por opiniones reales de tus clientes. */
 var SEED_REVIEWS = [
-  { s: 5, t: 'Los marcos selfie fueron el centro de la fiesta. Llegaron en tiempo y forma y quedaron hermosos.' },
-  { s: 5, t: 'Pedí las bandas personalizadas para mi cumple y quedaron exactamente como las imaginé. Súper atentos a cada detalle.' },
-  { s: 5, t: 'Excelente atención por WhatsApp: me ayudaron a elegir el diseño y respondieron rapidísimo.' },
-  { s: 5, t: 'Los carteles de mano fueron un éxito, todos se sacaron fotos con ellos. Muy recomendables.' },
+  { s: 5, t: 'Llegaron en tiempo y forma y quedaron hermosos.' },
+  { s: 5, t: 'Pedí las bandas personalizadas para mi cumple y quedaron exactamente como las imaginé.' },
+  { s: 5, t: 'Excelente atención por WhatsApp.' },
+  { s: 5, t: 'Los carteles de mano fueron un éxito, todos se sacaron fotos con ellos.' },
   { s: 5, t: 'Hicimos remeras para el grupo de egresados y la calidad es genial. El diseño quedó impecable.' },
   { s: 5, t: 'Me olvidé de encargar a tiempo y con la entrega en el día me salvaron el evento. ¡Gracias!' },
-  { s: 5, t: 'Se nota el cariño en cada pedido. Todo prolijo y con muy buena terminación.' },
-  { s: 5, t: 'Me hicieron un diseño a medida que no estaba en el catálogo y quedé fascinada.' },
-  { s: 4, t: 'Muy buenos precios para la calidad que entregan. Volvería a pedir sin dudarlo.' },
-  { s: 5, t: 'Me llegó a otra provincia sin problemas y en perfecto estado. Muy buena comunicación en todo momento.' }
+  { s: 5, t: 'Se nota el cariño en cada pedido.' },
+  { s: 5, t: 'Me hicieron un diseño a medida.' },
+  { s: 4, t: 'Muy buenos precios.' },
+  { s: 5, t: 'Me llegó a otra provincia sin problemas.' }
 ];
 
 /* ═══ CONFIGURACIÓN DE RESEÑAS (completá estos 4 datos, ver instrucciones) ═══
@@ -1260,18 +1262,18 @@ loadApprovedReviews();
 var CATALOG = [
   { title: 'Cartelería', groups: [
     { name: null, items: [
-      { img: 1, ico: '🪧', name: 'Cartel franja', desc: 'Diseñado por nosotros (ver diseños). Medida 100 × 40 cm.', price: '$30.000' },
-      { img: 2, ico: '🖼️', name: 'Marco selfie', desc: 'Diseñado por nosotros (ver diseños). Rectangular 90 × 60 cm o circular 70 cm. 3 carteles de mano de regalo.', price: '$35.000' },
-      { img: 3, ico: '⭕', name: 'Marco selfie circular grande', desc: 'Diseñado por nosotros (ver diseños). Circular 1 m. 3 carteles de mano de regalo.', price: '$55.000' },
+      { img: 1, ico: '🪧', name: 'Cartel franja', desc: 'Personalizado. Medida 100 × 40 cm.', price: '$35.000' },
+      { img: 2, ico: '🖼️', name: 'Marco selfie', desc: 'NUESTROS DISEÑOS (cambia color de base y frase). Rectangular 90 × 60 cm o circular 70 cm. 3 carteles de mano de regalo.', price: '$40.000' },
+      { img: 6, ico: '✏️', name: 'Marco Selfie Personalizado simple de nuestros diseños', desc: 'Podés indicarnos nuestro diseño de base y agregar 1 o más imágenes a tu gusto. Rectangular 90 × 60 cm o circular 70 cm.', price: '$45.000' },
+      { img: 7, ico: '🎨', name: 'Marco Selfie Personalizado con Servicio de diseño gráfico', desc: 'Replicamos en alta calidad imágenes de IA u otro (1 diseño). Rectangular 90 × 60 cm o circular 70 cm.', price: '$50.000' },
+      { img: 8, ico: '⏱️', name: 'Marco Selfie Personalizado con diseño gráfico ilimitado (por 12 horas)', desc: 'Servicio de diseño gráfico ilimitado durante 12 horas. Rectangular 90 × 60 cm o circular 70 cm.', price: '+$55.000' },
+      { img: 3, ico: '⭕', name: 'Marco selfie circular grande Personalizado', desc: 'Nuestros diseños o personalizado (1 diseño). Circular 1m x 1m. 3 carteles de mano de regalo.', price: '$60.000' },
       { img: 4, ico: '📐', name: 'Medidas especiales y otros materiales', desc: 'Consultanos medidas especiales y otros materiales.', price: null }
     ]},
     { name: 'Adicionales', items: [
       { img: 5, ico: '🛡️', name: 'Reforzado', desc: 'Marco reforzado.', price: 'Sin costo' },
-      { img: 6, ico: '✏️', name: 'Personalizado simple', desc: '1 diseño: podés indicarnos colores, letras y elementos.', price: '+$5.000' },
-      { img: 7, ico: '🎨', name: 'Servicio de diseño gráfico', desc: 'Replicamos en alta calidad imágenes de IA. Recreamos solo hasta 2 diseños.', price: '+$10.000' },
-      { img: 8, ico: '⏱️', name: 'Diseño gráfico ilimitado (12 horas)', desc: 'Servicio de diseño gráfico ilimitado durante 12 horas.', price: '+$15.000' },
       { img: 9, ico: '🌸', name: 'Flores artificiales', desc: 'Flores artificiales para decorar tu marco.', price: '+$35.000' },
-      { img: 10, ico: '⚡', name: 'Listo en el día', desc: 'No es a prueba de agua. Impresión de alta calidad en papel 120 gr.', price: '+$10.000' }
+      { img: 10, ico: '⚡', name: 'Listo en el día paga un adicional', desc: 'No es a prueba de agua. Impresión de alta calidad en papel 120 gr.', price: '+$12.000' }
     ]}
   ]},
   { title: 'Estampados', groups: [
