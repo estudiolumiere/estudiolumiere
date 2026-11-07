@@ -136,8 +136,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .nav a[aria-current="page"] { color: var(--accent); }
 
 /* ── VISTAS ── */
-.view { display: none; padding-top: 22px; }
-.view.active { display: block; }
+.view {
+  padding-top: 26px;
+  scroll-margin-top: calc(var(--top) + 6px);
+}
+.view + .view {
+  margin-top: 34px;
+  padding-top: 34px;
+  border-top: 1px solid var(--border);
+}
 
 .view-title {
   font-family: 'Playfair Display', serif;
@@ -470,13 +477,25 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   background: var(--panel);
   border-left: 1px solid var(--border);
   z-index: 50;
-  display: none;
+  display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform 0.28s ease;
+  transition: transform 0.28s ease, background 0.28s;
 }
-.side.show { display: flex; }
 .side.open { transform: translateX(0); box-shadow: -12px 0 32px rgba(120,53,15,0.22); }
+/* contenido del panel cerrado: oculto (el lengüeta siempre queda visible) */
+.side > :not(.side-handle) { visibility: hidden; transition: visibility 0s linear 0.28s; }
+.side.open > :not(.side-handle) { visibility: visible; transition-delay: 0s; }
+/* con un panel abierto, la lengüeta del otro se acomoda al costado del abierto */
+body.panel-open .side:not(.open) {
+  transform: translateX(0);
+  background: transparent;
+  border-left-color: transparent;
+  pointer-events: none;
+  z-index: 51;
+}
+.side-handle { pointer-events: auto; }
+#panelPrecios .side-handle { top: 142px; }
 
 .side-handle {
   position: absolute;
@@ -749,7 +768,7 @@ footer strong { color: var(--soft); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .side, .pl-item, .carousel-dot, .soc-btn, .faq-item, .faq-item summary::after { transition: none; }
+  .side, .side > *, .pl-item, .carousel-dot, .soc-btn, .faq-item, .faq-item summary::after { transition: none; }
   .carousel-track { scroll-behavior: auto; }
   .prod.flash { animation: none; }
 }
@@ -792,7 +811,7 @@ footer strong { color: var(--soft); }
 <main class="container">
 
   <!-- ═════════ INICIO ═════════ -->
-  <section id="inicio" class="view active" aria-label="Inicio">
+  <section id="inicio" class="view" aria-label="Inicio">
     <p class="hero-line">Somos Gabriela y Rodrigo, realizamos servicios de diseño gráfico, cartelería, remeras y productos personalizados para eventos. Te atendemos por Marketplace Facebook, Instagram y Whatsapp. Las ventas únicamente se efectuán por WhatsApp.</p>
     <div class="stack">
       <a href="https://www.instagram.com/estudiograficolumiere?igsh=OWk0cGRwZG8wZ3Vk" target="_blank" rel="noopener" class="soc-btn soc-ig">
@@ -800,19 +819,20 @@ footer strong { color: var(--soft); }
         <div class="lbl">Instagram <small>@estudiograficolumiere</small></div>
         <span class="arrow">›</span>
       </a>
+    </div>
 
-    <div class="carousel" id="clientsCarousel">
+    <div class="carousel" id="clientsCarousel" style="margin-top:12px">
       <div class="carousel-track" id="clientsTrack">
-        <div class="carousel-slide"><img src="1.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado"></div>
-        <div class="carousel-slide"><img src="2.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-        <div class="carousel-slide"><img src="3.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-        <div class="carousel-slide"><img src="4.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-        <div class="carousel-slide"><img src="5.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-        <div class="carousel-slide"><img src="6.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-        <div class="carousel-slide"><img src="7.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-        <div class="carousel-slide"><img src="8.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-        <div class="carousel-slide"><img src="9.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
-        <div class="carousel-slide"><img src="10.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy"></div>
+        <div class="carousel-slide"><img src="1.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" fetchpriority="high" decoding="async"></div>
+        <div class="carousel-slide"><img src="2.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy" decoding="async"></div>
+        <div class="carousel-slide"><img src="3.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy" decoding="async"></div>
+        <div class="carousel-slide"><img src="4.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy" decoding="async"></div>
+        <div class="carousel-slide"><img src="5.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy" decoding="async"></div>
+        <div class="carousel-slide"><img src="6.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy" decoding="async"></div>
+        <div class="carousel-slide"><img src="7.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy" decoding="async"></div>
+        <div class="carousel-slide"><img src="8.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy" decoding="async"></div>
+        <div class="carousel-slide"><img src="9.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy" decoding="async"></div>
+        <div class="carousel-slide"><img src="10.png" alt="Cliente de Estudio Gráfico Lumière con marco selfie personalizado" loading="lazy" decoding="async"></div>
       </div>
       <button class="carousel-arrow left" onclick="carouselMove(-1)" aria-label="Foto anterior">‹</button>
       <button class="carousel-arrow right" onclick="carouselMove(1)" aria-label="Foto siguiente">›</button>
@@ -852,7 +872,7 @@ footer strong { color: var(--soft); }
   <!-- ═════════ QUIÉNES SOMOS ═════════ -->
   <section id="quienes-somos" class="view" aria-label="Quiénes somos">
     <img src="LOGO2.png" alt="Logo de Lumière" class="about-logo">
-    <h1 class="view-title">Quiénes somos</h1>
+    <h2 class="view-title">Quiénes somos</h2>
     <div class="about-text">
       <p>Somos un equipo de estudiantes jujeños en Córdoba.</p>
       <p>Actualmente nos encontramos en zona norte, en barrio San Martín</p>
@@ -871,21 +891,24 @@ footer strong { color: var(--soft); }
         <div class="lbl">Instagram <small>@estudiograficolumiere</small></div>
         <span class="arrow">›</span>
       </a>
+    </div>
   </section>
 
   <!-- ═════════ CATÁLOGO ═════════ -->
   <section id="catalogo" class="view" aria-label="Catálogo">
+    <h2 class="view-title">Catálogo</h2>
     <a href="https://drive.google.com/drive/folders/1MTqab9Gnc58E50zkSnqYdjyJUHxtWOX7?usp=drive_link" target="_blank" rel="noopener" class="soc-btn soc-drive">
       <div class="ico">➡️</div>
       <div class="lbl">MIRÁ AQUÍ NUESTROS DISEÑOS<small>ELEGÍ EL DISEÑO QUE MÁS TE GUSTE (podemos modificar la paleta de colores, las frases) </small></div>
       <span class="arrow">›</span>
     </a>
-    <div class="stack">
+    <div class="stack" style="margin-top:11px">
       <a href="https://www.instagram.com/estudiograficolumiere?igsh=OWk0cGRwZG8wZ3Vk" target="_blank" rel="noopener" class="soc-btn soc-ig">
         <div class="ico">📸</div>
         <div class="lbl">MIRÁ AQUÍ NUESTROS TRABAJITOS EN INSTAGRAM<small>@estudiograficolumiere</small></div>
         <span class="arrow">›</span>
       </a>
+    </div>
 
     <div class="notice" role="note">
       <h2>DEMORAS</h2>
@@ -922,7 +945,7 @@ footer strong { color: var(--soft); }
 
   <!-- ═════════ PREGUNTAS FRECUENTES ═════════ -->
   <section id="preguntas" class="view" aria-label="Preguntas frecuentes">
-    <h1 class="view-title">Preguntas frecuentes</h1>
+    <h2 class="view-title">Preguntas frecuentes</h2>
     <p class="faq-intro">Tocá una pregunta para ver la respuesta. Si te queda alguna duda, escribinos por WhatsApp.</p>
 
     <div class="faq">
@@ -1016,7 +1039,7 @@ footer strong { color: var(--soft); }
 
   <!-- ═════════ CONTACTO ═════════ -->
   <section id="contacto" class="view" aria-label="Contacto">
-    <h1 class="view-title">Contacto</h1>
+    <h2 class="view-title">Contacto</h2>
 
     <div class="contact-list">
       <div class="contact-detail"><span class="ico">📍</span><span>Bibliotecarios Argentinos 228 (Para GPS colocar Bilbiotecarios Argentinos 225 o esquina Famatina 270) · Barrio San Martín · Córdoba Capital, Argentina.</span></div>
@@ -1052,7 +1075,7 @@ footer strong { color: var(--soft); }
 </main>
 
 <!-- ═════════ PANEL: RESEÑAS (Inicio) ═════════ -->
-<aside class="side" id="panelResenas" data-view="inicio" aria-label="Reseñas de clientes">
+<aside class="side" id="panelResenas" aria-label="Reseñas de clientes">
   <button class="side-handle" type="button" aria-expanded="false" aria-controls="panelResenas">Reseñas</button>
   <div class="side-head">
     <h2>Reseñas de clientes</h2>
@@ -1070,7 +1093,7 @@ footer strong { color: var(--soft); }
 </aside>
 
 <!-- ═════════ PANEL: LISTA DE PRECIOS (Catálogo) ═════════ -->
-<aside class="side" id="panelPrecios" data-view="catalogo" data-auto-open aria-label="Lista de precios">
+<aside class="side" id="panelPrecios" aria-label="Lista de precios">
   <button class="side-handle" type="button" aria-expanded="false" aria-controls="panelPrecios">Precios</button>
   <div class="side-head">
     <h2>Productos y precios</h2>
@@ -1080,49 +1103,54 @@ footer strong { color: var(--soft); }
 </aside>
 
 <script>
-/* ── NAVEGACIÓN ENTRE SECCIONES ── */
+/* ── NAVEGACIÓN: TODO EN UNA PÁGINA ──
+   Los botones del menú bajan hasta cada sección y se marca la que estás viendo. */
 var VIEWS = ['inicio', 'quienes-somos', 'catalogo', 'preguntas', 'contacto'];
 var wide = window.matchMedia('(min-width: 1100px)');
-var panelState = {};   // recuerda si cada panel está abierto o cerrado
+var sections = VIEWS.map(function (id) { return document.getElementById(id); });
 
-function go(id) {
-  if (VIEWS.indexOf(id) === -1) id = 'inicio';
-  document.querySelectorAll('.view').forEach(function (v) { v.classList.toggle('active', v.id === id); });
+function markNav(id) {
   document.querySelectorAll('.nav a').forEach(function (a) {
     if (a.dataset.go === id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });
-  document.querySelectorAll('.side').forEach(function (p) {
-    var show = p.dataset.view === id;
-    if (!show) { p.classList.remove('show', 'open'); return; }
-    var first = !(p.id in panelState);
-    // data-auto-open: se despliega solo al entrar a la sección; los demás, abiertos por defecto solo en pantallas anchas
-    var open = first ? (p.hasAttribute('data-auto-open') || wide.matches) : panelState[p.id];
-    p.classList.remove('open');
-    p.classList.add('show');
-    if (open) {
-      setPanel(p, false);
-      // espera un cuadro para que se vea el deslizamiento
-      requestAnimationFrame(function () { requestAnimationFrame(function () { setPanel(p, true); }); });
-    } else {
-      setPanel(p, false);
-    }
-  });
-  syncBodyPanel();
-  window.scrollTo(0, 0);
 }
 
-window.addEventListener('hashchange', function () { go(location.hash.slice(1)); });
+var spyTick = false;
+function spy() {
+  spyTick = false;
+  var line = document.querySelector('.topbar').offsetHeight + window.innerHeight * 0.3;
+  var current = VIEWS[0];
+  sections.forEach(function (sec) { if (sec.getBoundingClientRect().top <= line) current = sec.id; });
+  // al llegar al final de la página, marca la última sección
+  if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4) current = VIEWS[VIEWS.length - 1];
+  markNav(current);
+}
+window.addEventListener('scroll', function () {
+  if (!spyTick) { spyTick = true; requestAnimationFrame(spy); }
+}, { passive: true });
+window.addEventListener('resize', spy);
+
+document.querySelectorAll('.nav a, .brand').forEach(function (a) {
+  a.addEventListener('click', function () {
+    var id = (a.getAttribute('href') || '').slice(1);
+    if (a.dataset.go) markNav(id);
+  });
+});
 
 /* ── PANELES LATERALES (se pueden ocultar) ── */
 function setPanel(p, open) {
-  panelState[p.id] = open;
+  // un panel por vez: al abrir uno se cierra el otro
+  if (open) document.querySelectorAll('.side.open').forEach(function (o) {
+    if (o !== p) { o.classList.remove('open'); o.querySelector('.side-handle').setAttribute('aria-expanded', 'false'); }
+  });
+  if (open && p.id === 'panelResenas') loadApprovedReviews();
   p.classList.toggle('open', open);
   p.querySelector('.side-handle').setAttribute('aria-expanded', open ? 'true' : 'false');
   syncBodyPanel();
 }
 
 function syncBodyPanel() {
-  document.body.classList.toggle('panel-open', !!document.querySelector('.side.show.open'));
+  document.body.classList.toggle('panel-open', !!document.querySelector('.side.open'));
 }
 
 document.querySelectorAll('.side').forEach(function (p) {
@@ -1131,7 +1159,7 @@ document.querySelectorAll('.side').forEach(function (p) {
 });
 document.addEventListener('keydown', function (e) {
   if (e.key !== 'Escape') return;
-  var p = document.querySelector('.side.show.open');
+  var p = document.querySelector('.side.open');
   if (p) setPanel(p, false);
 });
 
@@ -1143,7 +1171,7 @@ var SEED_REVIEWS = [
   { s: 5, t: 'Excelente atención por WhatsApp.' },
   { s: 5, t: 'Los carteles de mano fueron un éxito.' },
   { s: 5, t: 'Hicimos remeras para el grupo de egresados.' },
-  { s: 5, t: 'Me olvidé de encargar a tiempo y con la entrega en el día me salvaron. },
+  { s: 5, t: 'Me olvidé de encargar a tiempo y con la entrega en el día me salvaron.' },
   { s: 5, t: 'Se nota el cariño' },
   { s: 5, t: 'Me hicieron un diseño a medida.' },
   { s: 4, t: 'Muy buenos precios.' },
@@ -1185,8 +1213,10 @@ function parseCSV(t) {
   return rows;
 }
 
+var reviewsRequested = false;
 function loadApprovedReviews() {
-  if (!REVIEWS_CONFIG.sheetCsvUrl) return;
+  if (reviewsRequested || !REVIEWS_CONFIG.sheetCsvUrl) return;
+  reviewsRequested = true;
   fetch(REVIEWS_CONFIG.sheetCsvUrl)
     .then(function (r) { return r.text(); })
     .then(function (txt) {
@@ -1285,7 +1315,6 @@ document.getElementById('reviewForm').addEventListener('submit', function (e) {
 
 renderReviews();
 renderStarPick();
-loadApprovedReviews();
 
 /* ── CARRUSEL DE CLIENTES ── */
 (function () {
@@ -1383,7 +1412,48 @@ var CATALOG = [
   ]}
 ];
 
+/* Si todas tus fotos tienen la misma extensión, dejá solo esa en la lista
+   (por ejemplo ['png']): cada extensión que falla es un pedido de más. */
 var IMG_EXT = ['png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG'];
+var imgCache = {};   // cada foto se busca una sola vez, aunque aparezca en el catálogo y en el panel
+
+function resolveImg(n) {
+  if (!imgCache[n]) {
+    imgCache[n] = new Promise(function (resolve) {
+      var i = 0, probe = new Image();
+      probe.onload = function () { resolve(probe.src); };
+      probe.onerror = function () {
+        i++;
+        if (i < IMG_EXT.length) probe.src = 'PRODUCTO' + n + '.' + IMG_EXT[i];
+        else resolve(null);
+      };
+      probe.src = 'PRODUCTO' + n + '.' + IMG_EXT[0];
+    });
+  }
+  return imgCache[n];
+}
+
+function loadInto(box) {
+  var p = box._prod;
+  resolveImg(p.img).then(function (src) {
+    if (!src) return;   // sin foto: queda el ícono
+    var img = document.createElement('img');
+    img.alt = p.name;
+    img.decoding = 'async';
+    img.src = src;
+    box.textContent = '';
+    box.appendChild(img);
+  });
+}
+
+// las fotos se piden recién cuando están por aparecer en pantalla
+var lazyIO = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+  entries.forEach(function (e) {
+    if (!e.isIntersecting) return;
+    lazyIO.unobserve(e.target);
+    loadInto(e.target);
+  });
+}, { rootMargin: '300px 0px' }) : null;
 
 function fillProductImage(box, p) {
   var ph = document.createElement('span');
@@ -1391,14 +1461,8 @@ function fillProductImage(box, p) {
   ph.textContent = p.ico;
   box.appendChild(ph);
   if (!p.img) return;
-  var i = 0, img = new Image();
-  img.alt = p.name;
-  img.onload = function () { box.textContent = ''; box.appendChild(img); };
-  img.onerror = function () {
-    i++;
-    if (i < IMG_EXT.length) img.src = 'PRODUCTO' + p.img + '.' + IMG_EXT[i];
-  };
-  img.src = 'PRODUCTO' + p.img + '.' + IMG_EXT[0];
+  box._prod = p;
+  if (lazyIO) lazyIO.observe(box); else loadInto(box);
 }
 
 var prodCount = 0;
@@ -1498,7 +1562,7 @@ function showProduct(id) {
 renderPriceList();
 
 /* ── ARRANQUE ── */
-go(location.hash.slice(1));
+spy();
 </script>
 </body>
 </html>
