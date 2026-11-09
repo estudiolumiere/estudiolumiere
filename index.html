@@ -1143,7 +1143,6 @@ function setPanel(p, open) {
   if (open) document.querySelectorAll('.side.open').forEach(function (o) {
     if (o !== p) { o.classList.remove('open'); o.querySelector('.side-handle').setAttribute('aria-expanded', 'false'); }
   });
-  if (open && p.id === 'panelResenas') loadApprovedReviews();
   p.classList.toggle('open', open);
   p.querySelector('.side-handle').setAttribute('aria-expanded', open ? 'true' : 'false');
   syncBodyPanel();
@@ -1239,7 +1238,7 @@ function loadApprovedReviews() {
       realReviews = out.reverse().slice(0, 30);
       renderReviews();
     })
-    .catch(function () { /* si falla, quedan las reseñas de ejemplo */ });
+    .catch(function () { reviewsRequested = false; /* si falla, quedan las de ejemplo y se reintenta al abrir el panel */ });
 }
 
 function starsText(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
@@ -1315,6 +1314,10 @@ document.getElementById('reviewForm').addEventListener('submit', function (e) {
 
 renderReviews();
 renderStarPick();
+// las reseñas de la hoja se piden apenas termina de cargar la página (sin demorarla)
+if (document.readyState === 'complete') loadApprovedReviews();
+else window.addEventListener('load', loadApprovedReviews);
+document.querySelector('#panelResenas .side-handle').addEventListener('click', loadApprovedReviews);
 
 /* ── CARRUSEL DE CLIENTES ── */
 (function () {
